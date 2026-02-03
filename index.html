@@ -18,6 +18,16 @@
       color: #111;
       background: #E0F7D9;
     }
+    #brainViz {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 220px;
+  height: 100vh;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
 
     h1 {
       font-size: 2.2em;
@@ -51,7 +61,6 @@
     }
   </style>
 </head>
-
 <body>
 
   <h1>hello, i'm aarav pillai!</h1>
@@ -117,7 +126,67 @@ i currently lead research at <a href="https://qinaraailab.org/">qinārā ai lab<
   <footer>
     last updated Jan 2026. this site is intentionally static; no analytics, no optimisation, no dark patterns.
   </footer>
-
+<canvas id="brainViz"></canvas>
 </body>
+  <script>
+const canvas = document.getElementById("brainViz");
+const ctx = canvas.getContext("2d");
+
+function resize() {
+  canvas.width = 220;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
+
+let points = [];
+
+document.addEventListener("mousemove", e => {
+  points.push({
+    x: Math.random() > 0.5 ? 80 : 140,
+    y: e.clientY,
+    vx: 0,
+    vy: 0
+  });
+
+  if (points.length > 600) points.shift();
+});
+
+function brainAttractor(p) {
+  const midY = canvas.height / 2;
+  const dx = p.x < 110 ? -1 : 1;
+
+  // bilateral lobes
+  const targetX = 110 + dx * (40 + 20 * Math.sin(p.y * 0.01));
+  const targetY = midY + (p.y - midY) * 0.85;
+
+  p.vx += (targetX - p.x) * 0.0006;
+  p.vy += (targetY - p.y) * 0.0006;
+
+  p.vx *= 0.96;
+  p.vy *= 0.96;
+
+  p.x += p.vx;
+  p.y += p.vy;
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "#4f6a5e";
+
+  points.forEach(p => {
+    brainAttractor(p);
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 1.2, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+
 </html>
 
