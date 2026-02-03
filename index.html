@@ -124,7 +124,7 @@ i currently lead research at <a href="https://qinaraailab.org/">qinārā ai lab<
   </p>
 
   <footer>
-    last updated Jan 2026. this site is intentionally static; no analytics, no optimisation, no dark patterns.
+    last updated jan 2026. this site is intentionally static; no analytics, no optimisation, no dark patterns.
   </footer>
 <canvas id="brainViz"></canvas>
 </body>
@@ -143,45 +143,57 @@ let points = [];
 let lastScrollY = window.scrollY;
 let scrollEnergy = 0;
 
+// seed some initial particles so it's visible immediately
+for (let i = 0; i < 200; i++) {
+  points.push({
+    x: 110 + (Math.random() - 0.5) * 60,
+    y: Math.random() * canvas.height,
+    vx: 0,
+    vy: 0
+  });
+}
+
 window.addEventListener("scroll", () => {
   const dy = window.scrollY - lastScrollY;
-  scrollEnergy = Math.min(30, Math.abs(dy));
+  scrollEnergy = Math.min(40, scrollEnergy + Math.abs(dy));
   lastScrollY = window.scrollY;
 
-  // seed particles on scroll
-  for (let i = 0; i < scrollEnergy; i++) {
+  for (let i = 0; i < Math.abs(dy) * 0.5; i++) {
     points.push({
-      x: 110 + (Math.random() - 0.5) * 40,
+      x: 110 + (Math.random() - 0.5) * 60,
       y: Math.random() * canvas.height,
       vx: 0,
       vy: 0
     });
   }
 
-  if (points.length > 800) points.splice(0, points.length - 800);
+  if (points.length > 900) {
+    points.splice(0, points.length - 900);
+  }
 });
 
 function brainTarget(p) {
   const midY = canvas.height / 2;
   const side = p.x < 110 ? -1 : 1;
   return {
-    x: 110 + side * (40 + 18 * Math.sin(p.y * 0.012)),
+    x: 110 + side * (35 + 20 * Math.sin(p.y * 0.012)),
     y: midY + (p.y - midY) * 0.85
   };
 }
 
 function waveTarget(p, t) {
   return {
-    x: 110 + 40 * Math.sin(p.y * 0.03 + t),
+    x: 110 + 45 * Math.sin(p.y * 0.03 + t),
     y: p.y
   };
 }
 
 function draw(time) {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // fade instead of clear
+  ctx.fillStyle = "rgba(224,247,217,0.15)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // morph factor: scroll energy → waveform
-  const morph = Math.min(1, scrollEnergy / 20);
+  const morph = Math.min(1, scrollEnergy / 30);
 
   ctx.fillStyle = "#4f6a5e";
 
@@ -189,15 +201,14 @@ function draw(time) {
     const b = brainTarget(p);
     const w = waveTarget(p, time * 0.001);
 
-    // interpolate brain ↔ wave
     const tx = b.x * (1 - morph) + w.x * morph;
     const ty = b.y * (1 - morph) + w.y * morph;
 
-    p.vx += (tx - p.x) * 0.0007;
-    p.vy += (ty - p.y) * 0.0007;
+    p.vx += (tx - p.x) * 0.0006;
+    p.vy += (ty - p.y) * 0.0006;
 
-    p.vx *= 0.95;
-    p.vy *= 0.95;
+    p.vx *= 0.96;
+    p.vy *= 0.96;
 
     p.x += p.vx;
     p.y += p.vy;
@@ -207,8 +218,7 @@ function draw(time) {
     ctx.fill();
   });
 
-  // decay scroll energy
-  scrollEnergy *= 0.92;
+  scrollEnergy *= 0.97;
 
   requestAnimationFrame(draw);
 }
@@ -216,7 +226,6 @@ function draw(time) {
 draw(0);
 </script>
 
-</script>
 
 </html>
 
