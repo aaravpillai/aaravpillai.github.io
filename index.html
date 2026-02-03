@@ -128,42 +128,6 @@ i currently lead research at <a href="https://qinaraailab.org/">qinārā ai lab<
   </footer>
 <canvas id="brainViz"></canvas>
 </body>
-<script>
-const canvas = document.getElementById("brainViz");
-const ctx = canvas.getContext("2d");
-
-function resize() {
-  canvas.width = 220;
-  canvas.height = window.innerHeight;
-}
-resize();
-window.addEventListener("resize", resize);
-
-let points = [];
-let lastScrollY = window.scrollY;
-let scrollEnergy = 0;
-
-// initial brain cloud
-for (let i = 0; i < 260; i++) {
-  points.push({
-    x: 110 + (Math.random() - 0.5) * 70,
-    y: Math.random() * canvas.height,
-    vx: 0,
-    vy: 0
-  });
-}
-
-window.addEventListener("scroll", () => {
-  const dy = window.scrollY - lastScrollY;
-  lastScrollY = window.scrollY;
-  scrollEnergy = Math.min(50, scrollEnergy + Math.abs(dy));
-
-  // add a few particles on scroll
-  for (let i = 0; i < Math.abs(dy) * 0.4; i++) {
-    points.push({
-      x: 110 + (Math.random() - 0.5) * 70,
-      y: Math.random() * canvas.height,
-      </script>
 
 
 </html>
