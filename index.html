@@ -69,45 +69,27 @@ I currently lead research at <a href="https://qinaraailab.org/">Qinārā AI Lab<
   </p>
 - Evidence of disciplined internet learning can be found here: <a href="https://www.linkedin.com/in/apillaiwork/details/certifications/">MOOC Certifications</a>  
 
-<h2>How I Work</h2>
+<h3 style="font-size:1em; margin-top:1.5em; color:#4f6a5e;">
+  current research attention (approximate)
+</h3>
 
-<button onclick="show('topics')">topics</button>
-<button onclick="show('methods')">methods</button>
+<svg width="100%" height="140" viewBox="0 0 700 140">
+  <!-- labels -->
+  <text x="0" y="20" font-size="12">AI policy</text>
+  <text x="0" y="50" font-size="12">healthcare AI</text>
+  <text x="0" y="80" font-size="12">creative models</text>
+  <text x="0" y="110" font-size="12">accessibility</text>
 
-<div id="viz"></div>
+  <!-- bars -->
+  <rect x="140" y="10" width="420" height="14" fill="#4f6a5e"/>
+  <rect x="140" y="40" width="360" height="14" fill="#6b8f7d"/>
+  <rect x="140" y="70" width="300" height="14" fill="#8fb3a2"/>
+  <rect x="140" y="100" width="380" height="14" fill="#5e8271"/>
+</svg>
 
-<script>
-const data = {
-  topics: [
-    { label: "AI policy", value: 40 },
-    { label: "healthcare", value: 30 },
-    { label: "culture", value: 30 }
-  ],
-  methods: [
-    { label: "qualitative research", value: 35 },
-    { label: "ML prototyping", value: 40 },
-    { label: "policy analysis", value: 25 }
-  ]
-};
-
-function show(type) {
-  const container = document.getElementById("viz");
-  container.innerHTML = "";
-
-  data[type].forEach(d => {
-    const bar = document.createElement("div");
-    bar.style.width = d.value + "%";
-    bar.style.background = "#4f6a5e";
-    bar.style.margin = "6px 0";
-    bar.style.padding = "4px";
-    bar.style.color = "#fff";
-    bar.textContent = d.label;
-    container.appendChild(bar);
-  });
-}
-
-show("topics");
-</script>
+<p style="font-size:0.85em; color:#666;">
+  not a claim of expertise; a sketch of attention over time
+</p>
   
   <h2>MSc Thesis</h2>
 
