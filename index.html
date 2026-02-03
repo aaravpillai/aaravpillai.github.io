@@ -143,10 +143,10 @@ let points = [];
 let lastScrollY = window.scrollY;
 let scrollEnergy = 0;
 
-// seed some initial particles so it's visible immediately
-for (let i = 0; i < 200; i++) {
+// initial brain cloud
+for (let i = 0; i < 260; i++) {
   points.push({
-    x: 110 + (Math.random() - 0.5) * 60,
+    x: 110 + (Math.random() - 0.5) * 70,
     y: Math.random() * canvas.height,
     vx: 0,
     vy: 0
@@ -155,76 +155,15 @@ for (let i = 0; i < 200; i++) {
 
 window.addEventListener("scroll", () => {
   const dy = window.scrollY - lastScrollY;
-  scrollEnergy = Math.min(40, scrollEnergy + Math.abs(dy));
   lastScrollY = window.scrollY;
+  scrollEnergy = Math.min(50, scrollEnergy + Math.abs(dy));
 
-  for (let i = 0; i < Math.abs(dy) * 0.5; i++) {
+  // add a few particles on scroll
+  for (let i = 0; i < Math.abs(dy) * 0.4; i++) {
     points.push({
-      x: 110 + (Math.random() - 0.5) * 60,
+      x: 110 + (Math.random() - 0.5) * 70,
       y: Math.random() * canvas.height,
-      vx: 0,
-      vy: 0
-    });
-  }
 
-  if (points.length > 900) {
-    points.splice(0, points.length - 900);
-  }
-});
-
-function brainTarget(p) {
-  const midY = canvas.height / 2;
-  const side = p.x < 110 ? -1 : 1;
-  return {
-    x: 110 + side * (35 + 20 * Math.sin(p.y * 0.012)),
-    y: midY + (p.y - midY) * 0.85
-  };
-}
-
-function waveTarget(p, t) {
-  return {
-    x: 110 + 45 * Math.sin(p.y * 0.03 + t),
-    y: p.y
-  };
-}
-
-function draw(time) {
-  // fade instead of clear
-  ctx.fillStyle = "rgba(224,247,217,0.15)";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  const morph = Math.min(1, scrollEnergy / 30);
-
-  ctx.fillStyle = "#4f6a5e";
-
-  points.forEach(p => {
-    const b = brainTarget(p);
-    const w = waveTarget(p, time * 0.001);
-
-    const tx = b.x * (1 - morph) + w.x * morph;
-    const ty = b.y * (1 - morph) + w.y * morph;
-
-    p.vx += (tx - p.x) * 0.0006;
-    p.vy += (ty - p.y) * 0.0006;
-
-    p.vx *= 0.96;
-    p.vy *= 0.96;
-
-    p.x += p.vx;
-    p.y += p.vy;
-
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, 1.1, 0, Math.PI * 2);
-    ctx.fill();
-  });
-
-  scrollEnergy *= 0.97;
-
-  requestAnimationFrame(draw);
-}
-
-draw(0);
-</script>
 
 
 </html>
