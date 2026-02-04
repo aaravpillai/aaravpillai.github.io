@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <title>aarav pillai</title>
 
-  <base target="_blank">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="aarav pillai is a researcher working on creative ai, accessibility, and technology governance.">
 
@@ -20,7 +18,6 @@
       background: #E0F7D9;
     }
 
-    /* skip link */
     .skip-link {
       position: absolute;
       top: -40px;
@@ -37,15 +34,12 @@
       top: 0;
     }
 
-    /* sage sticky nav */
     nav.site-nav {
       position: sticky;
       top: 0;
       z-index: 1000;
-
       background: rgba(224, 247, 217, 0.94);
       backdrop-filter: saturate(110%) blur(2px);
-
       border-bottom: 1px solid rgba(79, 106, 94, 0.25);
     }
 
@@ -149,48 +143,39 @@
 
     <h3>current research interests (approximate)</h3>
 
-   <svg
-  width="100%"
-  height="260"
-  viewBox="0 0 700 260"
-  role="img"
-  aria-labelledby="research-areas-title research-areas-desc"
->
-  <title id="research-areas-title">current research interests</title>
-  <desc id="research-areas-desc">
-    overlapping circles representing ai policy, healthcare ai, creative machine learning, and accessibility; creative ml is dominant, healthcare ai overlaps accessibility only.
-  </desc>
+    <svg
+      width="100%"
+      height="260"
+      viewBox="0 0 700 260"
+      role="img"
+      aria-labelledby="research-areas-title research-areas-desc"
+    >
+      <title id="research-areas-title">current research interests</title>
+      <desc id="research-areas-desc">
+        overlapping circles representing ai policy, healthcare ai, creative machine learning, and accessibility; creative ml is dominant, healthcare ai overlaps accessibility only.
+      </desc>
 
-  <!-- ai policy -->
-  <circle cx="200" cy="140" r="44" fill="#4f6a5e" opacity="0.75"/>
+      <circle cx="200" cy="140" r="44" fill="#4f6a5e" opacity="0.75"/>
+      <circle cx="360" cy="85" r="46" fill="#4f6a5e" opacity="0.78"/>
+      <circle cx="380" cy="170" r="56" fill="#4f6a5e" opacity="0.82"/>
+      <circle cx="500" cy="170" r="78" fill="#4f6a5e" opacity="0.75"/>
 
-  <!-- healthcare ai (moved up to avoid creative ml) -->
-  <circle cx="360" cy="85" r="46" fill="#4f6a5e" opacity="0.78"/>
-
-  <!-- accessibility (central, overlapping both) -->
-  <circle cx="380" cy="170" r="56" fill="#4f6a5e" opacity="0.82"/>
-
-  <!-- creative ml (largest, overlaps accessibility only) -->
-  <circle cx="500" cy="170" r="78" fill="#4f6a5e" opacity="0.75"/>
-
-  <text x="200" y="145" text-anchor="middle" font-size="13" fill="#fff" aria-hidden="true">
-    ai policy
-  </text>
-  <text x="360" y="90" text-anchor="middle" font-size="14" fill="#fff" aria-hidden="true">
-    healthcare ai
-  </text>
-  <text x="380" y="175" text-anchor="middle" font-size="15" fill="#fff" aria-hidden="true">
-    accessibility
-  </text>
-  <text x="500" y="175" text-anchor="middle" font-size="17" fill="#fff" aria-hidden="true">
-    creative ml
-  </text>
-</svg>
-
-
+      <text x="200" y="145" text-anchor="middle" font-size="13" fill="#fff" aria-hidden="true">
+        ai policy
+      </text>
+      <text x="360" y="90" text-anchor="middle" font-size="14" fill="#fff" aria-hidden="true">
+        healthcare ai
+      </text>
+      <text x="380" y="175" text-anchor="middle" font-size="15" fill="#fff" aria-hidden="true">
+        accessibility
+      </text>
+      <text x="500" y="175" text-anchor="middle" font-size="17" fill="#fff" aria-hidden="true">
+        creative ml
+      </text>
+    </svg>
 
     <p style="font-size:0.85em; color:#666;">
-      (not a claim of expertise; just a visual approximation of what my brain keeps circling back to. ai policy is like a spectre occasionally haunting my other research interests!)
+      (not a claim of expertise; just a visual approximation of what my brain keeps circling back to.)
     </p>
 
     <h2 id="dissertation">msc dissertation</h2>
@@ -204,16 +189,13 @@
     </p>
 
     <p>
-      the project sits at the intersection of creative ai, accessibility, and care; it treats sound not as output, but as infrastructure.
-    </p>
-
-    <p>
       <a href="assets/pdf/msc-thesis.pdf">read the dissertation (pdf)</a>
     </p>
 
     <h2 id="contact">contact</h2>
-  email: aarav [at] qinaraailab [dot] org
-      </a><br>
+
+    <p>
+      email: aarav [at] qinaraailab [dot] org<br>
       <a href="https://github.com/aaravpillai">github</a> •
       <a href="https://www.linkedin.com/in/apillaiwork/">linkedin</a>
     </p>
@@ -221,14 +203,36 @@
   </main>
 
   <footer>
-   <p> copyright © aarav pillai. last revised january 2026.
-     </p>
-    <p>   
+    <p>
+      copyright © aarav pillai. last revised january 2026.
     </p>
   </footer>
 
+  <!-- open all non-nav links in a new tab -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document
+        .querySelectorAll('a[href]:not(nav a)')
+        .forEach(link => {
+          const href = link.getAttribute('href');
+
+          if (
+            href.startsWith('#') ||
+            href.startsWith('mailto:') ||
+            href.startsWith('tel:')
+          ) {
+            return;
+          }
+
+          link.setAttribute('target', '_blank');
+          link.setAttribute('rel', 'noopener');
+        });
+    });
+  </script>
+
 </body>
 </html>
+
 
 
 
