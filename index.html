@@ -20,7 +20,6 @@
       background: #E0F7D9;
     }
 
-    /* skip link */
     .skip-link {
       position: absolute;
       top: -40px;
@@ -37,15 +36,12 @@
       top: 0;
     }
 
-    /* sage sticky nav */
     nav.site-nav {
       position: sticky;
       top: 0;
       z-index: 1000;
-
       background: rgba(224, 247, 217, 0.94);
       backdrop-filter: saturate(110%) blur(2px);
-
       border-bottom: 1px solid rgba(79, 106, 94, 0.25);
     }
 
@@ -151,37 +147,42 @@
 
     <svg
       width="100%"
-      height="260"
-      viewBox="0 0 700 260"
+      height="280"
+      viewBox="0 0 700 280"
       role="img"
       aria-labelledby="research-areas-title research-areas-desc"
     >
       <title id="research-areas-title">current research interests</title>
       <desc id="research-areas-desc">
-        overlapping circles representing ai policy, healthcare ai, creative machine learning, and accessibility; accessibility is central and most prominent.
+        overlapping circles representing creative machine learning, accessibility, healthcare ai, and ai policy; creative ml is the most prominent, with accessibility central.
       </desc>
 
-      <circle cx="200" cy="140" r="44" fill="#4f6a5e" opacity="0.75"/>
-      <circle cx="380" cy="95" r="46" fill="#4f6a5e" opacity="0.78"/>
-      <circle cx="480" cy="155" r="56" fill="#4f6a5e" opacity="0.75"/>
-      <circle cx="380" cy="170" r="60" fill="#4f6a5e" opacity="0.85"/>
+      <!-- smaller satellites -->
+      <circle cx="200" cy="155" r="42" fill="#4f6a5e" opacity="0.72"/>
+      <circle cx="360" cy="95" r="46" fill="#4f6a5e" opacity="0.75"/>
 
-      <text x="200" y="145" text-anchor="middle" font-size="13" fill="#fff" aria-hidden="true">
+      <!-- central but secondary -->
+      <circle cx="360" cy="175" r="58" fill="#4f6a5e" opacity="0.82"/>
+
+      <!-- primary focus -->
+      <circle cx="500" cy="160" r="70" fill="#4f6a5e" opacity="0.78"/>
+
+      <text x="200" y="160" text-anchor="middle" font-size="13" fill="#fff" aria-hidden="true">
         ai policy
       </text>
-      <text x="380" y="100" text-anchor="middle" font-size="14" fill="#fff" aria-hidden="true">
+      <text x="360" y="100" text-anchor="middle" font-size="14" fill="#fff" aria-hidden="true">
         healthcare ai
       </text>
-      <text x="480" y="160" text-anchor="middle" font-size="14" fill="#fff" aria-hidden="true">
-        creative ml
-      </text>
-      <text x="380" y="175" text-anchor="middle" font-size="15" fill="#fff" aria-hidden="true">
+      <text x="360" y="180" text-anchor="middle" font-size="15" fill="#fff" aria-hidden="true">
         accessibility
+      </text>
+      <text x="500" y="165" text-anchor="middle" font-size="16" fill="#fff" aria-hidden="true">
+        creative ml
       </text>
     </svg>
 
     <p style="font-size:0.85em; color:#666;">
-      (not a claim of expertise; just a visual approximation of what my brain keeps circling back to. you could think of ai policy as a spectre haunting my other research domains!)
+      (not a claim of expertise; just a visual approximation of what my brain keeps circling back to. creative ml does most of the heavy lifting; policy tends to linger, comment, and occasionally interfere.)
     </p>
 
     <h2 id="dissertation">msc dissertation</h2>
@@ -203,8 +204,9 @@
     </p>
 
     <h2 id="contact">contact</h2>
-  email: aarav [at] qinaraailab [dot] org
-      </a><br>
+
+    <p>
+      email: aarav [at] qinaraailab [dot] org<br>
       <a href="https://github.com/aaravpillai">github</a> •
       <a href="https://www.linkedin.com/in/apillaiwork/">linkedin</a>
     </p>
@@ -212,13 +214,13 @@
   </main>
 
   <footer>
-   <p> copyright © aarav pillai. last revised january 2026.
-     </p>
-    <p>   
+    <p>
+      copyright © aarav pillai. last revised january 2026.
     </p>
   </footer>
 
 </body>
 </html>
+
 
 
