@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>aarav's website</title>
+  <title>aarav pillai</title>
 
   <base target="_blank">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="aarav pillai is a researcher working on creative ai, accessibility, and technology governance, with experience in teaching, data science, and healthcare-adjacent research.">
 
   <style>
     body {
@@ -19,31 +21,55 @@
       background: #E0F7D9;
     }
 
-    .site-nav {
+    /* skip link */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px 12px;
+      z-index: 2000;
+      text-decoration: none;
+      font-size: 0.85em;
+    }
+
+    .skip-link:focus {
+      top: 0;
+    }
+
+    nav.site-nav {
       position: sticky;
       top: 0;
       background: #ffffff;
       z-index: 1000;
-      padding: 0.75rem 0;
-      margin-bottom: 48px;
       border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .nav-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0.75rem 20px;
       font-size: 0.85em;
       letter-spacing: 0.02em;
     }
 
-    .site-nav a {
+    nav a {
       margin-right: 18px;
       color: #3f5f55;
       text-decoration: none;
     }
 
-    .site-nav a:hover {
+    nav a:hover,
+    nav a:focus {
       border-bottom: 1px solid #3f5f55;
+      outline: none;
     }
 
     h1 {
       font-size: 2.2em;
       margin-bottom: 0.2em;
+      line-height: 1.25;
     }
 
     h2 {
@@ -51,20 +77,23 @@
       margin-top: 2em;
       border-bottom: 1px solid #ddd;
       padding-bottom: 4px;
+      scroll-margin-top: 4rem;
+      line-height: 1.25;
     }
 
     h3 {
       font-size: 1em;
       margin-top: 1.5em;
       color: #4f6a5e;
+      line-height: 1.25;
+    }
+
+    p {
+      max-width: 65ch;
     }
 
     a {
       color: #0055cc;
-    }
-
-    ul {
-      padding-left: 20px;
     }
 
     footer {
@@ -72,94 +101,116 @@
       font-size: 0.9em;
       color: #666;
     }
-
-    h2 {
-      scroll-margin-top: 4rem;
-    }
   </style>
 </head>
 
 <body>
 
-  <nav class="site-nav">
-    <a href="/">home</a>
-    <a href="/research/">research</a>
-    <a href="/writing/">writing</a>
-    <a href="/contact/">contact</a>
+  <a href="#main-content" class="skip-link">skip to main content</a>
+
+  <nav class="site-nav" aria-label="primary navigation">
+    <div class="nav-inner">
+      <a href="/">home</a>
+      <a href="/research/">research</a>
+      <a href="/writing/">writing</a>
+      <a href="/contact/">contact</a>
+    </div>
   </nav>
 
-  <h1>hello, i'm aarav pillai (he/him)</h1>
+  <main id="main-content">
 
-  <p>
-    i work on creative ai and develop ml systems, with a particular interest in how generative technologies are designed, governed, and quietly permitted to make decisions about culture and people. i am less taken with technological spectacle than with the practical afterlife of these systems; what they assume, what they normalise, and how policy language behaves once it encounters deployed code.
-  </p>
+    <h1>hello, i'm aarav pillai (he/him)</h1>
 
-  <p>
-    i currently lead research at <a href="https://qinaraailab.org/">qinārā ai lab</a>, and previously worked as an associate lecturer at the ual creative computing institute; there, i delivered lectures, graded a small mountain of assignments, and guided students to navigate the delightful intersection of ethical computation and creativity across the msc data science & ai for the creative industries + ma/msc computing & creative industry programmes. i also spent a year as an independent data scientist, working across government and humanitarian projects. i am now preparing for doctoral research in computer science, where my focus is creative ai and technology governance.
-  </p>
+    <p>
+      i work on creative ai and develop ml systems, with a particular interest in how generative technologies are designed, governed, and quietly permitted to make decisions about culture and people. i am less taken with technological spectacle than with the practical afterlife of these systems; what they assume, what they normalise, and how policy language behaves once it encounters deployed code.
+    </p>
 
-  <p>
-    • books that are currently occupying my attention can be found here:
-    <a href="https://www.goodreads.com/aaravreviews">goodreads</a>
-  </p>
+    <p>
+      i currently lead research at <a href="https://qinaraailab.org/">qinārā ai lab</a>, and previously worked as an associate lecturer at the ual creative computing institute; there, i delivered lectures, graded a small mountain of assignments, and guided students to navigate the delightful intersection of ethical computation and creativity across the msc data science & ai for the creative industries + ma/msc computing & creative industry programmes. i also spent a year as an independent data scientist, working across government and humanitarian projects. i am now preparing for doctoral research in computer science, where my focus is creative ai and technology governance.
+    </p>
 
-  <p>
-    • a compressed history of my professional life can be found here:
-    <a href="assets/pdf/cv.pdf">download cv (pdf)</a>
-  </p>
+    <p>
+      • books that are currently occupying my attention:
+      <a href="https://www.goodreads.com/aaravreviews">goodreads</a>
+    </p>
 
-  <p>
-    • evidence of disciplined internet learning can be found here:
-    <a href="https://www.linkedin.com/in/apillaiwork/details/certifications/">mooc certifications</a>
-  </p>
+    <p>
+      • a compressed history of my professional life:
+      <a href="assets/pdf/cv.pdf">download cv (pdf)</a>
+    </p>
 
-  <h3>current research interests (approximate)</h3>
+    <p>
+      • evidence of disciplined internet learning:
+      <a href="https://www.linkedin.com/in/apillaiwork/details/certifications/">mooc certifications</a>
+    </p>
 
-  <svg width="100%" height="260" viewBox="0 0 700 260">
-    <circle cx="200" cy="140" r="44" fill="#4f6a5e" opacity="0.75"/>
-    <circle cx="380" cy="95" r="46" fill="#4f6a5e" opacity="0.78"/>
-    <circle cx="480" cy="155" r="56" fill="#4f6a5e" opacity="0.75"/>
-    <circle cx="380" cy="170" r="60" fill="#4f6a5e" opacity="0.85"/>
+    <h3>current research interests (approximate)</h3>
 
-    <text x="200" y="145" text-anchor="middle" font-size="13" fill="#fff">ai policy</text>
-    <text x="380" y="100" text-anchor="middle" font-size="14" fill="#fff">healthcare ai</text>
-    <text x="480" y="160" text-anchor="middle" font-size="14" fill="#fff">creative ml</text>
-    <text x="380" y="175" text-anchor="middle" font-size="15" fill="#fff">accessibility</text>
-  </svg>
+    <svg
+      width="100%"
+      height="260"
+      viewBox="0 0 700 260"
+      role="img"
+      aria-labelledby="research-areas-title research-areas-desc"
+    >
+      <title id="research-areas-title">current research interests</title>
+      <desc id="research-areas-desc">
+        overlapping circles representing ai policy, healthcare ai, creative machine learning, and accessibility; accessibility is central and most prominent.
+      </desc>
 
-  <p style="font-size:0.85em; color:#666;">
-    (not a claim of expertise; just a sketch of attention over time. you could think of ai policy as a spectre haunting my other research domains!)
-  </p>
+      <circle cx="200" cy="140" r="44" fill="#4f6a5e" opacity="0.75"/>
+      <circle cx="380" cy="95" r="46" fill="#4f6a5e" opacity="0.78"/>
+      <circle cx="480" cy="155" r="56" fill="#4f6a5e" opacity="0.75"/>
+      <circle cx="380" cy="170" r="60" fill="#4f6a5e" opacity="0.85"/>
 
-  <h2 id="dissertation">msc dissertation</h2>
+      <text x="200" y="145" text-anchor="middle" font-size="13" fill="#fff" aria-hidden="true">
+        ai policy
+      </text>
+      <text x="380" y="100" text-anchor="middle" font-size="14" fill="#fff" aria-hidden="true">
+        healthcare ai
+      </text>
+      <text x="480" y="160" text-anchor="middle" font-size="14" fill="#fff" aria-hidden="true">
+        creative ml
+      </text>
+      <text x="380" y="175" text-anchor="middle" font-size="15" fill="#fff" aria-hidden="true">
+        accessibility
+      </text>
+    </svg>
 
-  <p style="font-style: italic; color:#4f6a5e;">
-    dissertation focus: timbre transfer, autistic stimming, and assistive sound design
-  </p>
+    <p style="font-size:0.85em; color:#666;">
+      (not a claim of expertise; just a sketch of attention over time. you could think of ai policy as a spectre haunting my other research domains!)
+    </p>
 
-  <p>
-    my dissertation explored how timbre-transfer models might be repurposed not for musical novelty, but for self-regulation; specifically to support autistic stimming practices rather than suppress them.
-  </p>
+    <h2 id="dissertation">msc dissertation</h2>
 
-  <p>
-    the project sits at the intersection of creative ai, accessibility, and care; it treats sound not as output, but as infrastructure.
-  </p>
+    <p style="font-style: italic; color:#4f6a5e;">
+      dissertation focus: timbre transfer, autistic stimming, and assistive sound design
+    </p>
 
-  <p>
-    <a href="assets/pdf/msc-thesis.pdf">read the dissertation (pdf)</a>
-  </p>
+    <p>
+      my dissertation explored how timbre-transfer models might be repurposed not for musical novelty, but for self-regulation; specifically to support autistic stimming practices rather than suppress them.
+    </p>
 
-  <h2 id="contact">contact</h2>
+    <p>
+      the project sits at the intersection of creative ai, accessibility, and care; it treats sound not as output, but as infrastructure.
+    </p>
 
-  <p>
-  email:
-  <a href="mailto:aarav@qinaraailab.org">
-    aarav [at] qinaraailab [dot] org
-  </a><br>
-  <a href="https://github.com/aaravpillai">github</a> •
-  <a href="https://www.linkedin.com/in/apillaiwork/">linkedin</a>
-</p>
+    <p>
+      <a href="assets/pdf/msc-thesis.pdf">read the dissertation (pdf)</a>
+    </p>
 
+    <h2 id="contact">contact</h2>
+
+    <p>
+      email:
+      <a href="mailto:aarav@qinaraailab.org">
+        aarav [at] qinaraailab [dot] org
+      </a><br>
+      <a href="https://github.com/aaravpillai">github</a> •
+      <a href="https://www.linkedin.com/in/apillaiwork/">linkedin</a>
+    </p>
+
+  </main>
 
   <footer>
     copyright © aarav pillai. last revised january 2026. this site remains deliberately static; unoptimised and uninterested in manipulation
@@ -167,3 +218,4 @@
 
 </body>
 </html>
+
