@@ -49,11 +49,36 @@
       font-size: 0.9em;
       color: #666;
     }
+    nav {
+  position: sticky;
+  top: 0;
+  background: #E0F7D9;
+  padding: 12px 0;
+  margin-bottom: 40px;
+  font-size: 0.9em;
+}
+
+nav a {
+  margin-right: 16px;
+  color: #4f6a5e;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
   </style>
 </head>
 <body>
+  <nav>
+  <a href="#about">about</a>
+  <a href="#research">research</a>
+  <a href="#dissertation">dissertation</a>
+  <a href="#contact">contact</a>
+</nav>
 
-  <h1>hello, i'm aarav pillai!</h1>
+
+  <h1 id="about">hello, i'm aarav pillai!</h1>
   <p>
 
 i work on creative ai and develop ml systems, with a particular interest in how generative technologies are designed, governed, and quietly permitted to make decisions about culture and people. i am less taken with technological spectacle than with the practical afterlife of these systems; what they assume, what they normalise, and how policy language behaves once it encounters deployed code.
@@ -90,7 +115,7 @@ i currently lead research at <a href="https://qinaraailab.org/">qinārā ai lab<
   (not a claim of expertise; just a sketch of attention over time)
 </p>
   
-  <h2>msc dissertation</h2>
+<h2 id="dissertation">msc dissertation</h2>
 
   <p style="font-style: italic; color:#4f6a5e;">
     dissertation focus: timbre transfer, autistic stimming, and assistive sound design
@@ -107,7 +132,7 @@ i currently lead research at <a href="https://qinaraailab.org/">qinārā ai lab<
     <a href="assets/pdf/msc-thesis.pdf">read the dissertation (pdf)</a>
   </p>
   
-  <h2>contact</h2>
+<h2 id="contact">contact</h2>
   <p>
     email: aarav [at] qinaraailab [dot] org<br>
     <a href="https://github.com/aaravpillai">github</a> • <a href="https://www.linkedin.com/in/apillaiwork/">linkedin</a> 
