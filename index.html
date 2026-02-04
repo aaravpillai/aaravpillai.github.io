@@ -98,6 +98,11 @@
       font-size: 0.9em;
       color: #666;
     }
+
+    /* align svg with text column */
+    .figure-left {
+      max-width: 65ch;
+    }
   </style>
 </head>
 
@@ -143,36 +148,38 @@
 
     <h3>current research interests (approximate)</h3>
 
-    <svg
-      width="100%"
-      height="260"
-      viewBox="0 0 700 260"
-      role="img"
-      aria-labelledby="research-areas-title research-areas-desc"
-    >
-      <title id="research-areas-title">current research interests</title>
-      <desc id="research-areas-desc">
-        overlapping circles representing ai policy, healthcare ai, creative machine learning, and accessibility; creative ml is dominant, healthcare ai overlaps accessibility only.
-      </desc>
+    <div class="figure-left">
+      <svg
+        width="100%"
+        height="260"
+        viewBox="0 0 700 260"
+        role="img"
+        aria-labelledby="research-areas-title research-areas-desc"
+      >
+        <title id="research-areas-title">current research interests</title>
+        <desc id="research-areas-desc">
+          overlapping circles representing ai policy, healthcare ai, creative machine learning, and accessibility; creative ml is dominant, healthcare ai overlaps accessibility only.
+        </desc>
 
-      <circle cx="200" cy="140" r="44" fill="#4f6a5e" opacity="0.75"/>
-      <circle cx="360" cy="85" r="46" fill="#4f6a5e" opacity="0.78"/>
-      <circle cx="380" cy="170" r="56" fill="#4f6a5e" opacity="0.82"/>
-      <circle cx="500" cy="170" r="78" fill="#4f6a5e" opacity="0.75"/>
+        <circle cx="200" cy="140" r="44" fill="#4f6a5e" opacity="0.75"/>
+        <circle cx="360" cy="85" r="46" fill="#4f6a5e" opacity="0.78"/>
+        <circle cx="380" cy="170" r="56" fill="#4f6a5e" opacity="0.82"/>
+        <circle cx="500" cy="170" r="78" fill="#4f6a5e" opacity="0.75"/>
 
-      <text x="200" y="145" text-anchor="middle" font-size="13" fill="#fff" aria-hidden="true">
-        ai policy
-      </text>
-      <text x="360" y="90" text-anchor="middle" font-size="14" fill="#fff" aria-hidden="true">
-        healthcare ai
-      </text>
-      <text x="380" y="175" text-anchor="middle" font-size="15" fill="#fff" aria-hidden="true">
-        accessibility
-      </text>
-      <text x="500" y="175" text-anchor="middle" font-size="17" fill="#fff" aria-hidden="true">
-        creative ml
-      </text>
-    </svg>
+        <text x="200" y="145" text-anchor="middle" font-size="13" fill="#fff" aria-hidden="true">
+          ai policy
+        </text>
+        <text x="360" y="90" text-anchor="middle" font-size="14" fill="#fff" aria-hidden="true">
+          healthcare ai
+        </text>
+        <text x="380" y="175" text-anchor="middle" font-size="15" fill="#fff" aria-hidden="true">
+          accessibility
+        </text>
+        <text x="500" y="175" text-anchor="middle" font-size="17" fill="#fff" aria-hidden="true">
+          creative ml
+        </text>
+      </svg>
+    </div>
 
     <p style="font-size:0.85em; color:#666;">
       (not a claim of expertise; just a visual approximation of where my attention tends to orbit. ai policy is like a spectre occasionally haunting my other research interests!)
@@ -208,7 +215,6 @@
     </p>
   </footer>
 
-  <!-- open all non-nav links in a new tab -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       document
@@ -232,6 +238,7 @@
 
 </body>
 </html>
+
 
 
 
