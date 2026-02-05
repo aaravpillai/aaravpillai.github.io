@@ -5,7 +5,6 @@
   <title>research — aarav pillai</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <meta name="description" content="research notes and directions by aarav pillai.">
 
   <style>
@@ -24,10 +23,8 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-
       background: rgba(224, 247, 217, 0.94);
       backdrop-filter: saturate(110%) blur(2px);
-
       border-bottom: 1px solid rgba(79, 106, 94, 0.25);
     }
 
@@ -57,8 +54,48 @@
       line-height: 1.25;
     }
 
+    h2 {
+      font-size: 1.4em;
+      margin-top: 2.5em;
+      margin-bottom: 0.8em;
+    }
+
     main {
       margin-top: 48px;
+    }
+
+    /* research projects */
+
+    .research-projects {
+      margin-top: 48px;
+    }
+
+    .project-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .project-list li {
+      margin-bottom: 26px;
+    }
+
+    .project-list a {
+      font-weight: 600;
+      color: #3f5f55;
+      text-decoration: none;
+    }
+
+    .project-list a:hover,
+    .project-list a:focus {
+      border-bottom: 1px solid #3f5f55;
+      outline: none;
+    }
+
+    .project-list p {
+      margin: 6px 0 0;
+      font-size: 0.95em;
+      color: #444;
     }
 
     footer {
@@ -80,13 +117,46 @@
       <a href="/contact/">contact</a>
     </div>
   </nav>
-  
+
   <main id="main-content">
     <h1>research</h1>
 
     <p>
       this section is under construction. ideas are presently being moved around rather than written down; some are still too new to name, others too familiar to trust. what eventually settles here will do so after a period of necessary disorder.
     </p>
+
+    <section class="research-projects" aria-labelledby="projects-heading">
+      <h2 id="projects-heading">selected projects</h2>
+
+      <ul class="project-list">
+        <li>
+          <a href="https://github.com/aaravpillai/text-readability-classifier" target="_blank" rel="noopener">
+            text readability classifier
+          </a>
+          <p>
+            employing modern deep learning algorithms such as CNNs and distilBERT, along with Naive Bayes, to assess readability on self-built corpora + dataset analysis using word embeddings with t-SNE
+          </p>
+        </li>
+
+        <li>
+          <a href="https://github.com/aaravpillai/vaes-for-map-generation" target="_blank" rel="noopener">
+            VAEs for map generation
+          </a>
+          <p>
+            using variational autoencoders for fantasy map generation (use case/industry --> worldbuilding tool for writers)
+          </p>
+        </li>
+
+        <li>
+          <a href="https://github.com/aaravpillai/feminist-chatbot?tab=readme-ov-file" target="_blank" rel="noopener">
+            feminist chatbot
+          </a>
+          <p>
+            xela is a simple, gender neutral chatbot that aims to help users find more diverse books. it has been designed with a special set of inclusivity guidelines called the 'pia standards' by josie young.
+          </p>
+        </li>
+      </ul>
+    </section>
   </main>
 
   <footer>
@@ -95,3 +165,4 @@
 
 </body>
 </html>
+
