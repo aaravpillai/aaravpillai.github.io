@@ -59,6 +59,31 @@
       margin-top: 48px;
     }
 
+    /* photography gallery */
+
+    .photo-intro {
+      margin-bottom: 28px;
+      color: #333;
+    }
+
+    .photo-gallery {
+      column-count: 2;
+      column-gap: 14px;
+    }
+
+    .photo-gallery img {
+      width: 100%;
+      margin-bottom: 14px;
+      break-inside: avoid;
+      border-radius: 3px;
+    }
+
+    @media (max-width: 600px) {
+      .photo-gallery {
+        column-count: 1;
+      }
+    }
+
     footer {
       margin-top: 60px;
       font-size: 0.9em;
@@ -82,6 +107,17 @@
   <main>
     <h1>photography</h1>
 
+    <p class="photo-intro">
+      small studies of light, waiting, and things that did not know they were being remembered.
+    </p>
+
+    <section class="photo-gallery">
+      <img src="./images/photo1.jpg" alt="">
+      <img src="./images/photo2.jpg" alt="">
+      <img src="./images/photo3.jpg" alt="">
+      <img src="./images/photo4.jpg" alt="">
+      <img src="./images/photo5.jpg" alt="">
+    </section>
   </main>
 
   <footer>
@@ -90,3 +126,4 @@
 
 </body>
 </html>
+
