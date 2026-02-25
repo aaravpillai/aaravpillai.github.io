@@ -10,19 +10,19 @@
   <style>
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      max-width: 700px;
+      max-width: 720px;
       margin: 0 auto;
-      padding: 0 20px;
-      line-height: 1.6;
+      padding: 0 22px;
+      line-height: 1.7;
       color: #111;
-      background: #E0F7D9;
+      background: #ffffff;
     }
 
     .skip-link {
       position: absolute;
       top: -40px;
       left: 0;
-      background: #3f5f55;
+      background: #111;
       color: #fff;
       padding: 8px 12px;
       z-index: 2000;
@@ -38,70 +38,77 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: rgba(224, 247, 217, 0.94);
-      backdrop-filter: saturate(110%) blur(2px);
-      border-bottom: 1px solid rgba(79, 106, 94, 0.25);
+      background: rgba(255,255,255,0.96);
+      border-bottom: 1px solid #eee;
     }
 
     .nav-inner {
-      max-width: 700px;
+      max-width: 720px;
       margin: 0 auto;
-      padding: 0.6rem 20px;
+      padding: 0.7rem 22px;
       font-size: 0.85em;
       letter-spacing: 0.02em;
     }
 
     nav a {
-      margin-right: 18px;
-      color: #3f5f55;
+      margin-right: 20px;
+      color: #333;
       text-decoration: none;
     }
 
     nav a:hover,
     nav a:focus {
-      border-bottom: 1px solid #3f5f55;
+      border-bottom: 1px solid #111;
       outline: none;
     }
 
     h1 {
       font-size: 2.2em;
-      margin-bottom: 0.2em;
+      margin-bottom: 0.4em;
+      margin-top: 2rem;
       line-height: 1.25;
     }
 
     h2 {
-      font-size: 1.3em;
-      margin-top: 2em;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 4px;
+      font-size: 1.35em;
+      margin-top: 2.4em;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 6px;
       scroll-margin-top: 4rem;
-      line-height: 1.25;
     }
 
     h3 {
       font-size: 1em;
-      margin-top: 1.5em;
-      color: #4f6a5e;
-      line-height: 1.25;
+      margin-top: 1.8em;
+      color: #333;
     }
 
     p {
-      max-width: 65ch;
+      max-width: 66ch;
     }
 
     a {
-      color: #0055cc;
+      color: #0044cc;
     }
 
     footer {
-      margin-top: 60px;
+      margin-top: 80px;
       font-size: 0.9em;
       color: #666;
     }
 
-    /* align svg with text column */
     .figure-left {
-      max-width: 65ch;
+      max-width: 66ch;
+    }
+
+    .meta-note {
+      font-size: 0.85em;
+      color: #666;
+    }
+
+    .italic-muted {
+      font-style: italic;
+      color: #444;
     }
   </style>
 </head>
@@ -125,26 +132,30 @@
     <h1>hello, i'm aarav pillai (he/him)</h1>
 
     <p>
-      i work on creative ml + healthcare ai, with a growing interest in how generative technologies are designed, governed, and quietly permitted to make decisions about culture and people. i am less taken with technological spectacle than with the practical afterlife of these systems; what they assume, what they normalise, and how policy language behaves once it encounters deployed code.
+      i work at the intersection of creative machine learning, healthcare ai, and technology governance. my research is less interested in spectacle than in consequence; what systems quietly assume, how they reshape practice once deployed, and which values become infrastructural through repetition.
     </p>
 
     <p>
-      i currently lead research at <a href="https://qinara.org">qinārā ai lab</a>, and previously worked as an associate lecturer at the ual creative computing institute; there, i delivered lectures, graded a small mountain of assignments, and guided students to navigate the delightful intersection of ethical computation and creativity across the msc data science & ai for the creative industries + ma/msc computing & creative industry programmes. i also spent a year as an independent data scientist, working across government and humanitarian projects. i am now preparing for doctoral research in computer science, a stage characterised by provisional plans, overannotated pdfs, and an unreasonable number of open tabs.
+      i currently lead research at <a href="https://qinara.org">qinārā ai lab</a>, where we build experimental creative systems while critically examining the power structures embedded within technical architectures. i previously served as an associate lecturer at the ual creative computing institute, supporting postgraduate teaching across the msc data science & ai for the creative industries and ma/msc computing & creative industry programmes.
     </p>
 
     <p>
-      • books that are currently occupying my attention:
+      before this, i worked as an independent data scientist on public-sector and humanitarian projects. i am now preparing for doctoral research in computer science; a period defined by annotated papers, evolving questions, and too many browser tabs.
+    </p>
+
+    <p>
+      • books currently in rotation: 
       <a href="https://www.goodreads.com/aaravreviews">goodreads</a>
     </p>
 
     <p>
-      • a compressed history of my professional life:
-      <a href="assets/pdf/cv.pdf">download cv (pdf)</a>
+      • curriculum vitae: 
+      <a href="assets/pdf/cv.pdf">download pdf</a>
     </p>
 
     <p>
-      • evidence of disciplined internet learning:
-      <a href="https://www.linkedin.com/in/apillaiwork/details/certifications/">mooc certifications</a>
+      • evidence of structured internet learning: 
+      <a href="https://www.linkedin.com/in/apillaiwork/details/certifications/">certifications</a>
     </p>
 
     <h3>current research interests (approximate)</h3>
@@ -159,41 +170,41 @@
       >
         <title id="research-areas-title">current research interests</title>
         <desc id="research-areas-desc">
-          overlapping circles representing ai policy, healthcare ai, creative machine learning, and accessibility; creative ml is dominant, healthcare ai overlaps accessibility only.
+          overlapping circles representing ai policy, healthcare ai, accessibility, and creative machine learning.
         </desc>
 
-        <circle cx="200" cy="140" r="44" fill="#4f6a5e" opacity="0.75"/>
-        <circle cx="360" cy="85" r="46" fill="#4f6a5e" opacity="0.78"/>
-        <circle cx="380" cy="170" r="56" fill="#4f6a5e" opacity="0.82"/>
-        <circle cx="500" cy="170" r="78" fill="#4f6a5e" opacity="0.75"/>
+        <circle cx="200" cy="140" r="44" fill="#333" opacity="0.75"/>
+        <circle cx="360" cy="85" r="46" fill="#333" opacity="0.78"/>
+        <circle cx="380" cy="170" r="56" fill="#333" opacity="0.82"/>
+        <circle cx="500" cy="170" r="78" fill="#333" opacity="0.75"/>
 
-        <text x="200" y="145" text-anchor="middle" font-size="13" fill="#fff" aria-hidden="true">
+        <text x="200" y="145" text-anchor="middle" font-size="13" fill="#fff">
           ai policy
         </text>
-        <text x="360" y="90" text-anchor="middle" font-size="14" fill="#fff" aria-hidden="true">
+        <text x="360" y="90" text-anchor="middle" font-size="14" fill="#fff">
           healthcare ai
         </text>
-        <text x="380" y="175" text-anchor="middle" font-size="15" fill="#fff" aria-hidden="true">
+        <text x="380" y="175" text-anchor="middle" font-size="15" fill="#fff">
           accessibility
         </text>
-        <text x="500" y="175" text-anchor="middle" font-size="17" fill="#fff" aria-hidden="true">
+        <text x="500" y="175" text-anchor="middle" font-size="17" fill="#fff">
           creative ml
         </text>
       </svg>
     </div>
 
-    <p style="font-size:0.85em; color:#666;">
-      (not a claim of expertise; just a visual approximation of where my attention tends to orbit. ai policy is like a spectre occasionally haunting my other research interests!)
+    <p class="meta-note">
+      (not a claim of mastery; simply a diagram of where my attention tends to orbit.)
     </p>
 
     <h2 id="dissertation">msc dissertation</h2>
 
-    <p style="font-style: italic; color:#4f6a5e;">
-      dissertation focus: timbre transfer, autistic stimming, and assistive sound design
+    <p class="italic-muted">
+      timbre transfer, autistic stimming, and assistive sound design
     </p>
 
     <p>
-      my dissertation explored how timbre-transfer models might be repurposed not for musical novelty, but for self-regulation; specifically to support autistic stimming practices rather than suppress them.
+      my dissertation examined how timbre-transfer models might be repurposed not for aesthetic novelty, but for self-regulation; specifically, to support autistic stimming practices rather than suppress them. the project approached assistive sound design as a site of agency rather than correction.
     </p>
 
     <p>
@@ -239,9 +250,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
