@@ -18,7 +18,7 @@
       position: relative;
     }
 
-    /* subtle floating decorative shapes */
+    /* floating decorative shapes */
     body::before,
     body::after {
       content: "";
@@ -44,12 +44,11 @@
       left: -80px;
     }
 
-    /* nav */
     nav.site-nav {
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255,255,255,0.94);
       backdrop-filter: blur(3px);
       border-bottom: 1px solid #eee;
     }
@@ -95,7 +94,6 @@
       display: inline-block;
     }
 
-    /* playful underline */
     h1::after {
       content: "";
       position: absolute;
@@ -158,6 +156,63 @@
       font-size: 0.85em;
       color: #777;
     }
+
+    /* --- Interactive Research Constellation --- */
+
+    .research-visual {
+      position: relative;
+      margin-top: 2em;
+    }
+
+    .research-visual svg {
+      width: 100%;
+      height: 320px;
+    }
+
+    .node circle {
+      opacity: 0.85;
+      transition: transform 0.25s ease, filter 0.25s ease, opacity 0.25s ease;
+      cursor: pointer;
+    }
+
+    .node text {
+      fill: white;
+      font-size: 14px;
+      pointer-events: none;
+    }
+
+    .node:hover circle {
+      transform: scale(1.08);
+      filter: drop-shadow(0 8px 18px rgba(0,0,0,0.15));
+      opacity: 1;
+    }
+
+    .node {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .node:nth-child(2) { animation-delay: 1s; }
+    .node:nth-child(3) { animation-delay: 2s; }
+    .node:nth-child(4) { animation-delay: 3s; }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .tooltip {
+      position: absolute;
+      background: #111;
+      color: #fff;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
   </style>
 </head>
 
@@ -184,11 +239,7 @@
     <p>
       i currently lead research at 
       <a href="https://qinara.org">qinārā ai lab</a>, 
-      where we build experimental creative systems while critically examining the power structures embedded within technical architectures. i previously worked as an associate lecturer at the ual creative computing institute, supporting postgraduate teaching across the msc data science & ai for the creative industries and ma/msc computing & creative industry programmes.
-    </p>
-
-    <p>
-      before this, i also worked as an independent data scientist on public-sector and humanitarian projects. i am now preparing for doctoral research in computer science; a period marked by several annotated papers, evolving research questions, and too many open browser tabs.
+      where we build experimental creative systems while critically examining the power structures embedded within technical architectures.
     </p>
 
     <div class="aside">
@@ -196,69 +247,60 @@
       <a href="https://www.goodreads.com/aaravreviews">goodreads</a>
     </div>
 
-    <div class="aside">
-      curriculum vitae:
-      <a href="assets/pdf/cv.pdf">download pdf</a>
-    </div>
-
-    <div class="aside">
-      certifications:
-      <a href="https://www.linkedin.com/in/apillaiwork/details/certifications/">structured internet learning</a>
-    </div>
-
     <h3>current research interests (approximate)</h3>
 
-    <div>
-      <svg
-        width="100%"
-        height="260"
-        viewBox="0 0 700 260"
-        role="img"
-      >
-        <circle cx="200" cy="140" r="44" fill="#333" opacity="0.75"/>
-        <circle cx="360" cy="85" r="46" fill="#333" opacity="0.78"/>
-        <circle cx="380" cy="170" r="56" fill="#333" opacity="0.82"/>
-        <circle cx="500" cy="170" r="78" fill="#333" opacity="0.75"/>
+    <div class="research-visual">
+      <svg viewBox="0 0 700 260">
 
-        <text x="200" y="145" text-anchor="middle" font-size="13" fill="#fff">
-          ai policy
-        </text>
-        <text x="360" y="90" text-anchor="middle" font-size="14" fill="#fff">
-          healthcare ai
-        </text>
-        <text x="380" y="175" text-anchor="middle" font-size="15" fill="#fff">
-          accessibility
-        </text>
-        <text x="500" y="175" text-anchor="middle" font-size="17" fill="#fff">
-          creative ml
-        </text>
+        <g class="node" data-label="ai policy">
+          <circle cx="200" cy="140" r="50" fill="url(#grad1)"/>
+          <text x="200" y="145" text-anchor="middle">ai policy</text>
+        </g>
+
+        <g class="node" data-label="healthcare ai">
+          <circle cx="360" cy="85" r="52" fill="url(#grad2)"/>
+          <text x="360" y="90" text-anchor="middle">healthcare ai</text>
+        </g>
+
+        <g class="node" data-label="accessibility">
+          <circle cx="380" cy="170" r="60" fill="url(#grad3)"/>
+          <text x="380" y="175" text-anchor="middle">accessibility</text>
+        </g>
+
+        <g class="node" data-label="creative ml">
+          <circle cx="500" cy="170" r="85" fill="url(#grad4)"/>
+          <text x="500" y="175" text-anchor="middle">creative ml</text>
+        </g>
+
+        <defs>
+          <radialGradient id="grad1">
+            <stop offset="0%" stop-color="#b388ff"/>
+            <stop offset="100%" stop-color="#7c4dff"/>
+          </radialGradient>
+
+          <radialGradient id="grad2">
+            <stop offset="0%" stop-color="#6ecbff"/>
+            <stop offset="100%" stop-color="#2196f3"/>
+          </radialGradient>
+
+          <radialGradient id="grad3">
+            <stop offset="0%" stop-color="#80cbc4"/>
+            <stop offset="100%" stop-color="#00897b"/>
+          </radialGradient>
+
+          <radialGradient id="grad4">
+            <stop offset="0%" stop-color="#ff8ad6"/>
+            <stop offset="100%" stop-color="#d81b60"/>
+          </radialGradient>
+        </defs>
+
       </svg>
+
+      <div id="tooltip" class="tooltip"></div>
     </div>
 
     <p class="meta-note">
       not a claim of mastery; simply a diagram of where my attention tends to orbit.
-    </p>
-
-    <h2 id="dissertation">msc dissertation</h2>
-
-    <p class="italic-muted">
-      timbre transfer, autistic stimming, and assistive sound design
-    </p>
-
-    <p>
-      my dissertation examined how timbre-transfer models might be repurposed not for aesthetic novelty, but for self-regulation; specifically, to support autistic stimming practices rather than suppress them. the project approached assistive sound design as a site of agency rather than correction.
-    </p>
-
-    <p>
-      <a href="assets/pdf/msc-thesis.pdf">read the dissertation (pdf)</a>
-    </p>
-
-    <h2 id="contact">contact</h2>
-
-    <p>
-      email: aarav [at] qinara [dot] org<br>
-      <a href="https://github.com/aaravpillai">github</a> •
-      <a href="https://www.linkedin.com/in/apillaiwork/">linkedin</a>
     </p>
 
   </main>
@@ -266,6 +308,24 @@
   <footer>
     copyright © aarav pillai. last revised january 2026.
   </footer>
+
+  <script>
+    const nodes = document.querySelectorAll(".node");
+    const tooltip = document.getElementById("tooltip");
+
+    nodes.forEach(node => {
+      node.addEventListener("mousemove", e => {
+        tooltip.textContent = node.dataset.label;
+        tooltip.style.left = e.pageX + 10 + "px";
+        tooltip.style.top = e.pageY - 30 + "px";
+        tooltip.style.opacity = 1;
+      });
+
+      node.addEventListener("mouseleave", () => {
+        tooltip.style.opacity = 0;
+      });
+    });
+  </script>
 
 </body>
 </html>
