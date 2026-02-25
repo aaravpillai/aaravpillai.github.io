@@ -3,60 +3,137 @@
 <head>
   <meta charset="UTF-8">
   <title>writing — aarav pillai</title>
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      max-width: 700px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: 0 20px;
-      line-height: 1.6;
+      padding: 0 24px;
+      line-height: 1.7;
       color: #111;
-      background: #E0F7D9;
+      background: #ffffff; /* changed to white */
+      position: relative;
     }
 
-    /* sage sticky nav — identical to homepage */
+    /* subtle floating decorative shapes */
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      z-index: -1;
+      border-radius: 50%;
+      opacity: 0.08;
+    }
+
+    body::before {
+      width: 220px;
+      height: 220px;
+      background: #b388ff;
+      top: 80px;
+      right: -80px;
+    }
+
+    body::after {
+      width: 160px;
+      height: 160px;
+      background: #6ecbff;
+      bottom: 120px;
+      left: -60px;
+    }
+
+    /* nav */
     nav.site-nav {
       position: sticky;
       top: 0;
       z-index: 1000;
-
-      background: rgba(224, 247, 217, 0.94);
-      backdrop-filter: saturate(110%) blur(2px);
-
-      border-bottom: 1px solid rgba(79, 106, 94, 0.25);
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(3px);
+      border-bottom: 1px solid #eee;
     }
 
     .nav-inner {
-      max-width: 700px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: 0.6rem 20px;
+      padding: 0.7rem 24px;
       font-size: 0.85em;
       letter-spacing: 0.02em;
     }
 
     nav a {
-      margin-right: 18px;
-      color: #3f5f55;
+      margin-right: 20px;
+      color: #444;
       text-decoration: none;
+      position: relative;
     }
 
-    nav a:hover,
-    nav a:focus {
-      border-bottom: 1px solid #3f5f55;
-      outline: none;
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 1px;
+      bottom: -3px;
+      left: 0;
+      background: #000;
+      transition: width 0.2s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
     }
 
     main {
-      margin-top: 48px;
+      margin-top: 64px;
+    }
+
+    h1 {
+      font-size: 2.4em;
+      margin-bottom: 0.4em;
+      position: relative;
+      display: inline-block;
+    }
+
+    /* playful offset underline */
+    h1::after {
+      content: "";
+      position: absolute;
+      width: 110%;
+      height: 8px;
+      bottom: 4px;
+      left: -5%;
+      background: #e0f7fa;
+      z-index: -1;
+    }
+
+    p {
+      max-width: 68ch;
+      margin-bottom: 1.3em;
+    }
+
+    a {
+      color: #0044cc;
+      text-decoration: none;
+      border-bottom: 1px dotted #0044cc;
+    }
+
+    a:hover {
+      border-bottom: 1px solid #0044cc;
+    }
+
+    /* marginal-style note */
+    .aside {
+      font-size: 0.9em;
+      color: #555;
+      border-left: 3px solid #eee;
+      padding-left: 12px;
+      margin: 2em 0;
     }
 
     footer {
-      margin-top: 60px;
-      font-size: 0.9em;
-      color: #666;
+      margin-top: 80px;
+      font-size: 0.85em;
+      color: #777;
     }
   </style>
 </head>
@@ -74,15 +151,19 @@
   </nav>
 
   <main>
-        <h1>writing</h1>
+
+    <h1>writing</h1>
 
     <p>
       this section gathers writing in its loosest sense: notes, fragments, reviews, and occasional longer pieces that function less as publication and more as record.
     </p>
 
     <p>
-      i use my <a href="https://www.goodreads.com/aaravreviews">goodreads</a> and
-      <a href="https://letterboxd.com/aaravpov">letterboxd</a> as public marginalia; places to think alongside books and films while they are still warm.
+      i use my 
+      <a href="https://www.goodreads.com/aaravreviews">goodreads</a> 
+      and
+      <a href="https://letterboxd.com/aaravpov">letterboxd</a> 
+      as public marginalia; places to think alongside books and films while they are still warm.
     </p>
 
     <p>
@@ -91,12 +172,14 @@
 
     <p>
       some fiction and unfinished work from when i was fifteen also lives on
-      <a href="https://www.wattpad.com/burmeserose">wattpad</a>, where writing is allowed to be provisional, excessive, or quietly abandoned.
+      <a href="https://www.wattpad.com/burmeserose">wattpad</a>, 
+      where writing is allowed to be provisional, excessive, or quietly abandoned.
     </p>
 
-    <p>
+    <div class="aside">
       taken together, these spaces form a personal archive rather than a portfolio; a way of noticing what keeps returning.
-    </p>
+    </div>
+
   </main>
 
   <footer>
@@ -105,4 +188,3 @@
 
 </body>
 </html>
-
