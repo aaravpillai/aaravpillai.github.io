@@ -1,333 +1,338 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>aarav pillai</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="aarav pillai is a researcher working on creative ai, accessibility, and technology governance.">
+<meta charset="UTF-8">
+<title>aarav pillai</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="aarav pillai is a researcher working on creative ai, accessibility, and technology governance.">
 
-  <style>
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 0 24px;
-      line-height: 1.7;
-      color: #111;
-      background: #ffffff;
-      position: relative;
-    }
+<style>
+:root{
+  --accent:#e0f7fa;
+  --text:#111;
+  --bg:#ffffff;
+}
 
-    /* floating decorative shapes */
-    body::before,
-    body::after {
-      content: "";
-      position: fixed;
-      z-index: -1;
-      border-radius: 50%;
-      opacity: 0.08;
-    }
+body{
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  max-width:760px;
+  margin:0 auto;
+  padding:0 24px;
+  line-height:1.7;
+  color:var(--text);
+  background:var(--bg);
+  transition:background .4s ease,color .4s ease;
+  position:relative;
+}
 
-    body::before {
-      width: 240px;
-      height: 240px;
-      background: #b388ff;
-      top: 120px;
-      right: -100px;
-    }
+/* floating background shapes */
+body::before,
+body::after{
+  content:"";
+  position:fixed;
+  z-index:-1;
+  border-radius:50%;
+  opacity:.08;
+}
 
-    body::after {
-      width: 180px;
-      height: 180px;
-      background: #6ecbff;
-      bottom: 160px;
-      left: -80px;
-    }
+body::before{
+  width:240px;height:240px;
+  background:#c5b3ff;
+  top:120px;right:-100px;
+}
 
-    nav.site-nav {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(255,255,255,0.94);
-      backdrop-filter: blur(3px);
-      border-bottom: 1px solid #eee;
-    }
+body::after{
+  width:180px;height:180px;
+  background:#aee2ff;
+  bottom:160px;left:-80px;
+}
 
-    .nav-inner {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 0.7rem 24px;
-      font-size: 0.85em;
-      letter-spacing: 0.02em;
-    }
+/* nav */
+nav{
+  position:sticky;
+  top:0;
+  background:rgba(255,255,255,.95);
+  border-bottom:1px solid #eee;
+  backdrop-filter:blur(4px);
+}
 
-    nav a {
-      margin-right: 20px;
-      color: #444;
-      text-decoration: none;
-      position: relative;
-    }
+.nav-inner{
+  padding:.7rem 0;
+  font-size:.85em;
+}
 
-    nav a::after {
-      content: "";
-      position: absolute;
-      width: 0%;
-      height: 1px;
-      bottom: -3px;
-      left: 0;
-      background: #000;
-      transition: width 0.2s ease;
-    }
+nav a{
+  margin-right:20px;
+  color:#444;
+  text-decoration:none;
+  position:relative;
+}
 
-    nav a:hover::after {
-      width: 100%;
-    }
+nav a::after{
+  content:"";
+  position:absolute;
+  width:0%;
+  height:1px;
+  bottom:-3px;
+  left:0;
+  background:#000;
+  transition:.2s;
+}
 
-    main {
-      margin-top: 64px;
-    }
+nav a:hover::after{
+  width:100%;
+}
 
-    h1 {
-      font-size: 2.4em;
-      margin-bottom: 0.5em;
-      position: relative;
-      display: inline-block;
-    }
+h1{
+  font-size:2.4em;
+  margin:64px 0 12px;
+  position:relative;
+  display:inline-block;
+}
 
-    h1::after {
-      content: "";
-      position: absolute;
-      width: 110%;
-      height: 10px;
-      bottom: 6px;
-      left: -5%;
-      background: #e0f7fa;
-      z-index: -1;
-    }
+h1::after{
+  content:"";
+  position:absolute;
+  width:110%;
+  height:10px;
+  bottom:6px;
+  left:-5%;
+  background:var(--accent);
+  z-index:-1;
+  transition:.3s;
+}
 
-    h2 {
-      font-size: 1.4em;
-      margin-top: 3em;
-      margin-bottom: 0.6em;
-    }
+h3{
+  margin-top:3em;
+}
 
-    h3 {
-      font-size: 1em;
-      margin-top: 2em;
-      color: #333;
-    }
+p{
+  max-width:68ch;
+}
 
-    p {
-      max-width: 68ch;
-      margin-bottom: 1.4em;
-    }
+.aside{
+  font-size:.9em;
+  border-left:3px solid #eee;
+  padding-left:12px;
+  margin:2em 0;
+}
 
-    a {
-      color: #0044cc;
-      text-decoration: none;
-      border-bottom: 1px dotted #0044cc;
-    }
+/* ---- research constellation ---- */
 
-    a:hover {
-      border-bottom: 1px solid #0044cc;
-    }
+.research-wrap{
+  margin-top:2em;
+  position:relative;
+}
 
-    .aside {
-      font-size: 0.9em;
-      color: #555;
-      border-left: 3px solid #eee;
-      padding-left: 12px;
-      margin: 2em 0;
-    }
+svg{
+  width:100%;
+  height:320px;
+}
 
-    .meta-note {
-      font-size: 0.9em;
-      color: #666;
-      margin-top: 1em;
-    }
+.node circle{
+  cursor:pointer;
+  transition:transform .3s ease, filter .3s ease;
+  opacity:.9;
+}
 
-    .italic-muted {
-      font-style: italic;
-      color: #444;
-    }
+.node:hover circle{
+  transform:scale(1.08);
+  filter:drop-shadow(0 8px 20px rgba(0,0,0,.15));
+}
 
-    footer {
-      margin-top: 100px;
-      font-size: 0.85em;
-      color: #777;
-    }
+.node text{
+  fill:#333;
+  font-size:14px;
+  pointer-events:none;
+}
 
-    /* --- Interactive Research Constellation --- */
+/* floating motion */
+.node{
+  animation:float 6s ease-in-out infinite;
+}
+.node:nth-child(2){animation-delay:1s}
+.node:nth-child(3){animation-delay:2s}
+.node:nth-child(4){animation-delay:3s}
 
-    .research-visual {
-      position: relative;
-      margin-top: 2em;
-    }
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+  100%{transform:translateY(0)}
+}
 
-    .research-visual svg {
-      width: 100%;
-      height: 320px;
-    }
+/* tooltip */
+.tooltip{
+  position:absolute;
+  background:#111;
+  color:#fff;
+  font-size:12px;
+  padding:6px 10px;
+  border-radius:6px;
+  pointer-events:none;
+  opacity:0;
+  transition:.2s;
+}
 
-    .node circle {
-      opacity: 0.85;
-      transition: transform 0.25s ease, filter 0.25s ease, opacity 0.25s ease;
-      cursor: pointer;
-    }
+/* expandable panel */
+#research-info{
+  margin-top:1em;
+  font-size:.95em;
+  padding:12px;
+  background:#f7f7f7;
+  border-left:4px solid var(--accent);
+  display:none;
+}
 
-    .node text {
-      fill: white;
-      font-size: 14px;
-      pointer-events: none;
-    }
+/* controls */
+.controls{
+  margin-top:20px;
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
 
-    .node:hover circle {
-      transform: scale(1.08);
-      filter: drop-shadow(0 8px 18px rgba(0,0,0,0.15));
-      opacity: 1;
-    }
+button{
+  padding:6px 12px;
+  border:1px solid #ddd;
+  background:#fff;
+  cursor:pointer;
+  font-size:.8em;
+}
 
-    .node {
-      animation: float 6s ease-in-out infinite;
-    }
+button:hover{
+  background:#f2f2f2;
+}
 
-    .node:nth-child(2) { animation-delay: 1s; }
-    .node:nth-child(3) { animation-delay: 2s; }
-    .node:nth-child(4) { animation-delay: 3s; }
+/* dark mode */
+.dark{
+  --bg:#111;
+  --text:#f5f5f5;
+}
+.dark nav{
+  background:rgba(17,17,17,.95);
+}
+.dark #research-info{
+  background:#1a1a1a;
+}
 
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-6px); }
-      100% { transform: translateY(0px); }
-    }
-
-    .tooltip {
-      position: absolute;
-      background: #111;
-      color: #fff;
-      font-size: 12px;
-      padding: 6px 10px;
-      border-radius: 6px;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-
-  </style>
+footer{
+  margin-top:80px;
+  font-size:.85em;
+  color:#777;
+}
+</style>
 </head>
 
 <body>
 
-  <nav class="site-nav" aria-label="primary navigation">
-    <div class="nav-inner">
-      <a href="/">home</a>
-      <a href="/research/">research</a>
-      <a href="/writing/">writing</a>
-      <a href="/photography/">photography</a>
-      <a href="/contact/">contact</a>
-    </div>
-  </nav>
+<nav>
+  <div class="nav-inner">
+    <a href="/">home</a>
+    <a href="/research/">research</a>
+    <a href="/writing/">writing</a>
+    <a href="/photography/">photography</a>
+    <a href="/contact/">contact</a>
+  </div>
+</nav>
 
-  <main>
+<main>
 
-    <h1>hello, i'm aarav pillai (he/him)</h1>
+<h1>hello, i'm aarav pillai (he/him)</h1>
 
-    <p>
-      i work at the intersection of creative machine learning, healthcare ai, and internet governance. my research is less interested in spectacle than in consequence; what systems quietly assume, how they reshape practice once deployed, and which values become infrastructural through repetition.
-    </p>
+<p>
+i work at the intersection of creative machine learning, healthcare ai, and internet governance.
+</p>
 
-    <p>
-      i currently lead research at 
-      <a href="https://qinara.org">qinārā ai lab</a>, 
-      where we build experimental creative systems while critically examining the power structures embedded within technical architectures.
-    </p>
+<div class="aside">
+books taking up my attention:
+<a href="https://www.goodreads.com/aaravreviews">goodreads</a>
+</div>
 
-    <div class="aside">
-      books taking up my attention:
-      <a href="https://www.goodreads.com/aaravreviews">goodreads</a>
-    </div>
+<h3>current research interests</h3>
 
-    <div class="aside"> curriculum vitae: <a href="assets/pdf/cv.pdf">download pdf</a> </div> <div class="aside"> certifications: <a href="https://www.linkedin.com/in/apillaiwork/details/certifications/">structured internet learning</a> </div>
+<div class="research-wrap">
 
-    <h3>current research interests (approximate)</h3>
+<svg viewBox="0 0 700 260">
 
-    <div class="research-visual">
-      <svg viewBox="0 0 700 260">
+<g class="node" data-info="policy design, data governance, infrastructural power.">
+  <circle cx="200" cy="140" r="55" fill="#f8c8dc"/>
+  <text x="200" y="145" text-anchor="middle">ai policy</text>
+</g>
 
-        <g class="node" data-label="ai policy">
-          <circle cx="200" cy="140" r="50" fill="url(#grad1)"/>
-          <text x="200" y="145" text-anchor="middle">ai policy</text>
-        </g>
+<g class="node" data-info="assistive systems, clinical contexts, embodied ai.">
+  <circle cx="360" cy="85" r="60" fill="#c8e7ff"/>
+  <text x="360" y="90" text-anchor="middle">healthcare ai</text>
+</g>
 
-        <g class="node" data-label="healthcare ai">
-          <circle cx="360" cy="85" r="52" fill="url(#grad2)"/>
-          <text x="360" y="90" text-anchor="middle">healthcare ai</text>
-        </g>
+<g class="node" data-info="neurodiversity, interface design, adaptive sound.">
+  <circle cx="380" cy="175" r="65" fill="#d5f5e3"/>
+  <text x="380" y="180" text-anchor="middle">accessibility</text>
+</g>
 
-        <g class="node" data-label="accessibility">
-          <circle cx="380" cy="170" r="60" fill="url(#grad3)"/>
-          <text x="380" y="175" text-anchor="middle">accessibility</text>
-        </g>
+<g class="node" data-info="generative models, creative coding, aesthetic systems.">
+  <circle cx="520" cy="160" r="85" fill="#e6d6ff"/>
+  <text x="520" y="165" text-anchor="middle">creative ml</text>
+</g>
 
-        <g class="node" data-label="creative ml">
-          <circle cx="500" cy="170" r="85" fill="url(#grad4)"/>
-          <text x="500" y="175" text-anchor="middle">creative ml</text>
-        </g>
+</svg>
 
-        <defs>
-          <radialGradient id="grad1">
-            <stop offset="0%" stop-color="#b388ff"/>
-            <stop offset="100%" stop-color="#7c4dff"/>
-          </radialGradient>
+<div id="tooltip" class="tooltip"></div>
+<div id="research-info"></div>
 
-          <radialGradient id="grad2">
-            <stop offset="0%" stop-color="#6ecbff"/>
-            <stop offset="100%" stop-color="#2196f3"/>
-          </radialGradient>
+</div>
 
-          <radialGradient id="grad3">
-            <stop offset="0%" stop-color="#80cbc4"/>
-            <stop offset="100%" stop-color="#00897b"/>
-          </radialGradient>
+<div class="controls">
+<button id="darkToggle">toggle dark mode</button>
+<button id="accentBtn">change accent</button>
+<button id="focusBtn">random research focus</button>
+</div>
 
-          <radialGradient id="grad4">
-            <stop offset="0%" stop-color="#ff8ad6"/>
-            <stop offset="100%" stop-color="#d81b60"/>
-          </radialGradient>
-        </defs>
+</main>
 
-      </svg>
+<footer>
+copyright © aarav pillai. last revised january 2026.
+</footer>
 
-      <div id="tooltip" class="tooltip"></div>
-    </div>
+<script>
+const nodes=document.querySelectorAll(".node");
+const tooltip=document.getElementById("tooltip");
+const info=document.getElementById("research-info");
 
-    <p class="meta-note">
-      not a claim of mastery; simply a diagram of where my attention tends to orbit.
-    </p>
+nodes.forEach(node=>{
+  node.addEventListener("mousemove",e=>{
+    tooltip.textContent=node.querySelector("text").textContent;
+    tooltip.style.left=e.pageX+10+"px";
+    tooltip.style.top=e.pageY-30+"px";
+    tooltip.style.opacity=1;
+  });
+  node.addEventListener("mouseleave",()=>tooltip.style.opacity=0);
 
-  </main>
+  node.addEventListener("click",()=>{
+    info.style.display="block";
+    info.textContent=node.dataset.info;
+  });
+});
 
-  <footer>
-    copyright © aarav pillai. last revised january 2026.
-  </footer>
+/* dark mode */
+document.getElementById("darkToggle").onclick=()=>{
+  document.body.classList.toggle("dark");
+};
 
-  <script>
-    const nodes = document.querySelectorAll(".node");
-    const tooltip = document.getElementById("tooltip");
+/* accent switch */
+const accents=["#e0f7fa","#ffe4f2","#e8f5e9","#fff3cd"];
+let index=0;
+document.getElementById("accentBtn").onclick=()=>{
+  index=(index+1)%accents.length;
+  document.documentElement.style.setProperty("--accent",accents[index]);
+};
 
-    nodes.forEach(node => {
-      node.addEventListener("mousemove", e => {
-        tooltip.textContent = node.dataset.label;
-        tooltip.style.left = e.pageX + 10 + "px";
-        tooltip.style.top = e.pageY - 30 + "px";
-        tooltip.style.opacity = 1;
-      });
-
-      node.addEventListener("mouseleave", () => {
-        tooltip.style.opacity = 0;
-      });
-    });
-  </script>
+/* random focus */
+document.getElementById("focusBtn").onclick=()=>{
+  const randomNode=nodes[Math.floor(Math.random()*nodes.length)];
+  randomNode.querySelector("circle").style.transform="scale(1.2)";
+  setTimeout(()=>randomNode.querySelector("circle").style.transform="scale(1)",600);
+};
+</script>
 
 </body>
 </html>
