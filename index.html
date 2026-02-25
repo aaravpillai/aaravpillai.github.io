@@ -13,56 +13,61 @@
   --bg:#ffffff;
 }
 
+/* ------------------ base layout ------------------ */
+
 body{
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   max-width:760px;
   margin:0 auto;
   padding:0 24px;
-  line-height:1.7;
+  line-height:1.75;
   color:var(--text);
   background:var(--bg);
   transition:background .4s ease,color .4s ease;
   position:relative;
 }
 
-/* floating background shapes */
+/* subtle floating shapes */
 body::before,
 body::after{
   content:"";
   position:fixed;
   z-index:-1;
   border-radius:50%;
-  opacity:.08;
+  opacity:.07;
 }
 
 body::before{
   width:240px;height:240px;
-  background:#c5b3ff;
+  background:#cfc2ff;
   top:120px;right:-100px;
 }
 
 body::after{
   width:180px;height:180px;
-  background:#aee2ff;
+  background:#bde7ff;
   bottom:160px;left:-80px;
 }
 
-/* nav */
+/* ------------------ premium sticky nav ------------------ */
+
 nav{
   position:sticky;
   top:0;
-  background:rgba(255,255,255,.95);
-  border-bottom:1px solid #eee;
-  backdrop-filter:blur(4px);
+  z-index:1000;
+  background:#ffffff;              /* solid white */
+  border-bottom:1px solid #ececec;
+  box-shadow:0 4px 20px rgba(0,0,0,0.04); /* subtle premium depth */
 }
 
 .nav-inner{
-  padding:.7rem 0;
+  padding:.75rem 0;
   font-size:.85em;
+  letter-spacing:.02em;
 }
 
 nav a{
-  margin-right:20px;
+  margin-right:22px;
   color:#444;
   text-decoration:none;
   position:relative;
@@ -73,19 +78,21 @@ nav a::after{
   position:absolute;
   width:0%;
   height:1px;
-  bottom:-3px;
+  bottom:-4px;
   left:0;
   background:#000;
-  transition:.2s;
+  transition:.2s ease;
 }
 
 nav a:hover::after{
   width:100%;
 }
 
+/* ------------------ typography ------------------ */
+
 h1{
-  font-size:2.4em;
-  margin:64px 0 12px;
+  font-size:2.5em;
+  margin:72px 0 16px;
   position:relative;
   display:inline-block;
 }
@@ -94,8 +101,8 @@ h1::after{
   content:"";
   position:absolute;
   width:110%;
-  height:10px;
-  bottom:6px;
+  height:12px;
+  bottom:8px;
   left:-5%;
   background:var(--accent);
   z-index:-1;
@@ -104,29 +111,31 @@ h1::after{
 
 h3{
   margin-top:3em;
+  font-weight:500;
 }
 
 p{
   max-width:68ch;
+  margin-bottom:1.5em;
 }
 
 .aside{
   font-size:.9em;
   border-left:3px solid #eee;
-  padding-left:12px;
+  padding-left:14px;
   margin:2em 0;
 }
 
-/* ---- research constellation ---- */
+/* ------------------ research constellation ------------------ */
 
 .research-wrap{
-  margin-top:2em;
+  margin-top:2.5em;
   position:relative;
 }
 
 svg{
   width:100%;
-  height:320px;
+  height:340px;
 }
 
 .node circle{
@@ -137,7 +146,7 @@ svg{
 
 .node:hover circle{
   transform:scale(1.08);
-  filter:drop-shadow(0 8px 20px rgba(0,0,0,.15));
+  filter:drop-shadow(0 8px 22px rgba(0,0,0,.15));
 }
 
 .node text{
@@ -173,50 +182,55 @@ svg{
   transition:.2s;
 }
 
-/* expandable panel */
+/* expandable info */
 #research-info{
-  margin-top:1em;
+  margin-top:1.2em;
   font-size:.95em;
-  padding:12px;
-  background:#f7f7f7;
+  padding:14px;
+  background:#f8f8f8;
   border-left:4px solid var(--accent);
   display:none;
 }
 
 /* controls */
 .controls{
-  margin-top:20px;
+  margin-top:28px;
   display:flex;
-  gap:12px;
+  gap:14px;
   flex-wrap:wrap;
 }
 
 button{
-  padding:6px 12px;
+  padding:7px 14px;
   border:1px solid #ddd;
   background:#fff;
   cursor:pointer;
   font-size:.8em;
+  transition:.2s;
 }
 
 button:hover{
   background:#f2f2f2;
 }
 
-/* dark mode */
+/* ------------------ dark mode ------------------ */
+
 .dark{
   --bg:#111;
   --text:#f5f5f5;
 }
+
 .dark nav{
-  background:rgba(17,17,17,.95);
+  background:#111;
+  border-bottom:1px solid #222;
 }
+
 .dark #research-info{
   background:#1a1a1a;
 }
 
 footer{
-  margin-top:80px;
+  margin-top:90px;
   font-size:.85em;
   color:#777;
 }
@@ -240,7 +254,7 @@ footer{
 <h1>hello, i'm aarav pillai (he/him)</h1>
 
 <p>
-i work at the intersection of creative machine learning, healthcare ai, and internet governance.
+i work at the intersection of creative machine learning, healthcare ai, and internet governance. my research focuses on consequence rather than spectacle.
 </p>
 
 <div class="aside">
@@ -255,22 +269,22 @@ books taking up my attention:
 <svg viewBox="0 0 700 260">
 
 <g class="node" data-info="policy design, data governance, infrastructural power.">
-  <circle cx="200" cy="140" r="55" fill="#f8c8dc"/>
+  <circle cx="200" cy="140" r="55" fill="#f8d7e8"/>
   <text x="200" y="145" text-anchor="middle">ai policy</text>
 </g>
 
 <g class="node" data-info="assistive systems, clinical contexts, embodied ai.">
-  <circle cx="360" cy="85" r="60" fill="#c8e7ff"/>
+  <circle cx="360" cy="85" r="60" fill="#d6ecff"/>
   <text x="360" y="90" text-anchor="middle">healthcare ai</text>
 </g>
 
-<g class="node" data-info="neurodiversity, interface design, adaptive sound.">
-  <circle cx="380" cy="175" r="65" fill="#d5f5e3"/>
+<g class="node" data-info="neurodiversity, adaptive interfaces, sound design.">
+  <circle cx="380" cy="175" r="65" fill="#dcf5e9"/>
   <text x="380" y="180" text-anchor="middle">accessibility</text>
 </g>
 
-<g class="node" data-info="generative models, creative coding, aesthetic systems.">
-  <circle cx="520" cy="160" r="85" fill="#e6d6ff"/>
+<g class="node" data-info="generative systems, creative coding, aesthetic computation.">
+  <circle cx="520" cy="160" r="85" fill="#efe0ff"/>
   <text x="520" y="165" text-anchor="middle">creative ml</text>
 </g>
 
@@ -284,7 +298,7 @@ books taking up my attention:
 <div class="controls">
 <button id="darkToggle">toggle dark mode</button>
 <button id="accentBtn">change accent</button>
-<button id="focusBtn">random research focus</button>
+<button id="focusBtn">random focus</button>
 </div>
 
 </main>
@@ -313,12 +327,10 @@ nodes.forEach(node=>{
   });
 });
 
-/* dark mode */
 document.getElementById("darkToggle").onclick=()=>{
   document.body.classList.toggle("dark");
 };
 
-/* accent switch */
 const accents=["#e0f7fa","#ffe4f2","#e8f5e9","#fff3cd"];
 let index=0;
 document.getElementById("accentBtn").onclick=()=>{
@@ -326,7 +338,6 @@ document.getElementById("accentBtn").onclick=()=>{
   document.documentElement.style.setProperty("--accent",accents[index]);
 };
 
-/* random focus */
 document.getElementById("focusBtn").onclick=()=>{
   const randomNode=nodes[Math.floor(Math.random()*nodes.length)];
   randomNode.querySelector("circle").style.transform="scale(1.2)";
