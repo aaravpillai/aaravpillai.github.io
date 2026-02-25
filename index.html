@@ -3,119 +3,165 @@
 <head>
   <meta charset="UTF-8">
   <title>aarav pillai</title>
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="aarav pillai is a researcher working on creative ai, accessibility, and technology governance.">
 
   <style>
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      max-width: 720px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: 0 22px;
+      padding: 0 24px;
       line-height: 1.7;
       color: #111;
       background: #ffffff;
+      position: relative;
     }
 
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #111;
-      color: #fff;
-      padding: 8px 12px;
-      z-index: 2000;
-      text-decoration: none;
-      font-size: 0.8em;
+    /* subtle floating decorative shapes */
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      z-index: -1;
+      border-radius: 50%;
+      opacity: 0.08;
     }
 
-    .skip-link:focus {
-      top: 0;
+    body::before {
+      width: 240px;
+      height: 240px;
+      background: #b388ff;
+      top: 120px;
+      right: -100px;
     }
 
+    body::after {
+      width: 180px;
+      height: 180px;
+      background: #6ecbff;
+      bottom: 160px;
+      left: -80px;
+    }
+
+    /* nav */
     nav.site-nav {
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: rgba(255,255,255,0.96);
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(3px);
       border-bottom: 1px solid #eee;
     }
 
     .nav-inner {
-      max-width: 720px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: 0.7rem 22px;
+      padding: 0.7rem 24px;
       font-size: 0.85em;
       letter-spacing: 0.02em;
     }
 
     nav a {
       margin-right: 20px;
-      color: #333;
+      color: #444;
       text-decoration: none;
+      position: relative;
     }
 
-    nav a:hover,
-    nav a:focus {
-      border-bottom: 1px solid #111;
-      outline: none;
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 1px;
+      bottom: -3px;
+      left: 0;
+      background: #000;
+      transition: width 0.2s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    main {
+      margin-top: 64px;
     }
 
     h1 {
-      font-size: 2.2em;
-      margin-bottom: 0.4em;
-      margin-top: 2rem;
-      line-height: 1.25;
+      font-size: 2.4em;
+      margin-bottom: 0.5em;
+      position: relative;
+      display: inline-block;
+    }
+
+    /* playful underline */
+    h1::after {
+      content: "";
+      position: absolute;
+      width: 110%;
+      height: 10px;
+      bottom: 6px;
+      left: -5%;
+      background: #e0f7fa;
+      z-index: -1;
     }
 
     h2 {
-      font-size: 1.35em;
-      margin-top: 2.4em;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 6px;
-      scroll-margin-top: 4rem;
+      font-size: 1.4em;
+      margin-top: 3em;
+      margin-bottom: 0.6em;
     }
 
     h3 {
       font-size: 1em;
-      margin-top: 1.8em;
+      margin-top: 2em;
       color: #333;
     }
 
     p {
-      max-width: 66ch;
+      max-width: 68ch;
+      margin-bottom: 1.4em;
     }
 
     a {
       color: #0044cc;
+      text-decoration: none;
+      border-bottom: 1px dotted #0044cc;
     }
 
-    footer {
-      margin-top: 80px;
+    a:hover {
+      border-bottom: 1px solid #0044cc;
+    }
+
+    .aside {
       font-size: 0.9em;
-      color: #666;
-    }
-
-    .figure-left {
-      max-width: 66ch;
+      color: #555;
+      border-left: 3px solid #eee;
+      padding-left: 12px;
+      margin: 2em 0;
     }
 
     .meta-note {
-      font-size: 0.85em;
+      font-size: 0.9em;
       color: #666;
+      margin-top: 1em;
     }
 
     .italic-muted {
       font-style: italic;
       color: #444;
     }
+
+    footer {
+      margin-top: 100px;
+      font-size: 0.85em;
+      color: #777;
+    }
   </style>
 </head>
 
 <body>
-
-  <a href="#main-content" class="skip-link">skip to main content</a>
 
   <nav class="site-nav" aria-label="primary navigation">
     <div class="nav-inner">
@@ -127,7 +173,7 @@
     </div>
   </nav>
 
-  <main id="main-content">
+  <main>
 
     <h1>hello, i'm aarav pillai (he/him)</h1>
 
@@ -136,43 +182,39 @@
     </p>
 
     <p>
-      i currently lead research at <a href="https://qinara.org">qinārā ai lab</a>, where we build experimental creative systems while critically examining the power structures embedded within technical architectures. i previously served as an associate lecturer at the ual creative computing institute, supporting postgraduate teaching across the msc data science & ai for the creative industries and ma/msc computing & creative industry programmes.
+      i currently lead research at 
+      <a href="https://qinara.org">qinārā ai lab</a>, 
+      where we build experimental creative systems while critically examining the power structures embedded within technical architectures. i previously served as an associate lecturer at the ual creative computing institute, supporting postgraduate teaching across the msc data science & ai for the creative industries and ma/msc computing & creative industry programmes.
     </p>
 
     <p>
       before this, i worked as an independent data scientist on public-sector and humanitarian projects. i am now preparing for doctoral research in computer science; a period defined by annotated papers, evolving questions, and too many browser tabs.
     </p>
 
-    <p>
-      • books currently in rotation: 
+    <div class="aside">
+      books currently in rotation:
       <a href="https://www.goodreads.com/aaravreviews">goodreads</a>
-    </p>
+    </div>
 
-    <p>
-      • curriculum vitae: 
+    <div class="aside">
+      curriculum vitae:
       <a href="assets/pdf/cv.pdf">download pdf</a>
-    </p>
+    </div>
 
-    <p>
-      • evidence of structured internet learning: 
-      <a href="https://www.linkedin.com/in/apillaiwork/details/certifications/">certifications</a>
-    </p>
+    <div class="aside">
+      certifications:
+      <a href="https://www.linkedin.com/in/apillaiwork/details/certifications/">structured internet learning</a>
+    </div>
 
     <h3>current research interests (approximate)</h3>
 
-    <div class="figure-left">
+    <div>
       <svg
         width="100%"
         height="260"
         viewBox="0 0 700 260"
         role="img"
-        aria-labelledby="research-areas-title research-areas-desc"
       >
-        <title id="research-areas-title">current research interests</title>
-        <desc id="research-areas-desc">
-          overlapping circles representing ai policy, healthcare ai, accessibility, and creative machine learning.
-        </desc>
-
         <circle cx="200" cy="140" r="44" fill="#333" opacity="0.75"/>
         <circle cx="360" cy="85" r="46" fill="#333" opacity="0.78"/>
         <circle cx="380" cy="170" r="56" fill="#333" opacity="0.82"/>
@@ -194,7 +236,7 @@
     </div>
 
     <p class="meta-note">
-      (not a claim of mastery; simply a diagram of where my attention tends to orbit.)
+      not a claim of mastery; simply a diagram of where my attention tends to orbit.
     </p>
 
     <h2 id="dissertation">msc dissertation</h2>
@@ -222,31 +264,8 @@
   </main>
 
   <footer>
-    <p>
-      copyright © aarav pillai. last revised january 2026.
-    </p>
+    copyright © aarav pillai. last revised january 2026.
   </footer>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      document
-        .querySelectorAll('a[href]:not(nav a)')
-        .forEach(link => {
-          const href = link.getAttribute('href');
-
-          if (
-            href.startsWith('#') ||
-            href.startsWith('mailto:') ||
-            href.startsWith('tel:')
-          ) {
-            return;
-          }
-
-          link.setAttribute('target', '_blank');
-          link.setAttribute('rel', 'noopener');
-        });
-    });
-  </script>
 
 </body>
 </html>
