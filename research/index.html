@@ -3,73 +3,128 @@
 <head>
   <meta charset="UTF-8">
   <title>research — aarav pillai</title>
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="research notes and directions by aarav pillai.">
 
   <style>
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      max-width: 700px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: 0 20px;
-      line-height: 1.6;
+      padding: 0 24px;
+      line-height: 1.7;
       color: #111;
-      background: #E0F7D9;
+      background: #ffffff;
+      position: relative;
     }
 
-    /* sage sticky nav */
+    /* subtle floating decorative shapes */
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      z-index: -1;
+      border-radius: 50%;
+      opacity: 0.08;
+    }
+
+    body::before {
+      width: 220px;
+      height: 220px;
+      background: #b388ff;
+      top: 100px;
+      right: -80px;
+    }
+
+    body::after {
+      width: 160px;
+      height: 160px;
+      background: #6ecbff;
+      bottom: 140px;
+      left: -60px;
+    }
+
+    /* nav */
     nav.site-nav {
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: rgba(224, 247, 217, 0.94);
-      backdrop-filter: saturate(110%) blur(2px);
-      border-bottom: 1px solid rgba(79, 106, 94, 0.25);
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(3px);
+      border-bottom: 1px solid #eee;
     }
 
     .nav-inner {
-      max-width: 700px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: 0.6rem 20px;
+      padding: 0.7rem 24px;
       font-size: 0.85em;
       letter-spacing: 0.02em;
     }
 
     nav a {
-      margin-right: 18px;
-      color: #3f5f55;
+      margin-right: 20px;
+      color: #444;
       text-decoration: none;
+      position: relative;
     }
 
-    nav a:hover,
-    nav a:focus {
-      border-bottom: 1px solid #3f5f55;
-      outline: none;
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 1px;
+      bottom: -3px;
+      left: 0;
+      background: #000;
+      transition: width 0.2s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    main {
+      margin-top: 64px;
     }
 
     h1 {
-      font-size: 2.2em;
+      font-size: 2.4em;
       margin-bottom: 0.5em;
-      line-height: 1.25;
+      position: relative;
+      display: inline-block;
+    }
+
+    /* playful underline */
+    h1::after {
+      content: "";
+      position: absolute;
+      width: 110%;
+      height: 10px;
+      bottom: 6px;
+      left: -5%;
+      background: #e0f7fa;
+      z-index: -1;
     }
 
     h2 {
       font-size: 1.4em;
-      margin-top: 2.5em;
+      margin-top: 3em;
       margin-bottom: 0.8em;
     }
 
-    main {
-      margin-top: 48px;
+    p {
+      max-width: 68ch;
+      margin-bottom: 1.4em;
     }
 
-    /* research projects */
-
-    .research-projects {
-      margin-top: 48px;
+    hr {
+      border: none;
+      border-top: 1px solid #eee;
+      margin: 2.5em 0;
     }
 
+    /* project list */
     .project-list {
       list-style: none;
       padding: 0;
@@ -77,19 +132,18 @@
     }
 
     .project-list li {
-      margin-bottom: 26px;
+      margin-bottom: 28px;
     }
 
     .project-list a {
       font-weight: 600;
-      color: #3f5f55;
+      color: #0044cc;
       text-decoration: none;
+      border-bottom: 1px dotted #0044cc;
     }
 
-    .project-list a:hover,
-    .project-list a:focus {
-      border-bottom: 1px solid #3f5f55;
-      outline: none;
+    .project-list a:hover {
+      border-bottom: 1px solid #0044cc;
     }
 
     .project-list p {
@@ -98,10 +152,18 @@
       color: #444;
     }
 
-    footer {
-      margin-top: 60px;
+    .aside {
       font-size: 0.9em;
-      color: #666;
+      color: #555;
+      border-left: 3px solid #eee;
+      padding-left: 12px;
+      margin: 2em 0;
+    }
+
+    footer {
+      margin-top: 100px;
+      font-size: 0.85em;
+      color: #777;
     }
   </style>
 </head>
@@ -118,88 +180,101 @@
     </div>
   </nav>
 
-  <main id="main-content">
+  <main>
+
     <h1>research</h1>
 
     <p>
       this section is under construction. ideas are presently being moved around rather than written down; some are still too new to name, others too familiar to trust. what eventually settles here will do so after a period of necessary disorder.
     </p>
-<hr/>
-    <section class="research-projects" aria-labelledby="projects-heading">
-      <h2 id="projects-heading">selected projects</h2>
 
-      <ul class="project-list">
-        <li>
-          <a href="https://github.com/aaravpillai/text-readability-classifier" target="_blank" rel="noopener">
-            text readability classifier
-          </a>
-          <p>
-         experiments in readability assessment using cnns, distilbert, naive bayes, and t-sne          </p>
-        </li>
+    <hr>
 
-        <li>
-          <a href="https://github.com/aaravpillai/vaes-for-map-generation" target="_blank" rel="noopener">
-            variational autoencoders for map generation
-          </a>
-          <p>
-         using variational autoencoders to generate fantasy maps for writers who would rather not draw coastlines by hand          </p>
-        </li>
-        <li>
-          <a href="https://github.com/aaravpillai/image-clustering" target="_blank" rel="noopener">
-            image clustering
-          </a>
-          <p>
-        clustering images of brutalist buildings and oversized cats to soften brutalist architecture usually accused of being cold and severe   </p>
-        </li>
+    <h2>selected projects</h2>
 
-        <li>
-          <a href="https://github.com/aaravpillai/feminist-chatbot?tab=readme-ov-file" target="_blank" rel="noopener">
-            feminist chatbot
-          </a>
-          <p>
-          xela is a simple, gender-neutral chatbot for finding more diverse books, built around an inclusivity framework called the pia standards, developed by josie young.          </p>
-        </li>
-        <li>
-          <a href="https://github.com/aaravpillai/audio-reactive-stylegan" target="_blank" rel="noopener">
-            audio-reactive stylegan
-          </a>
-          <p>
-            experiments in offbeat music videos using lucid sonic dreams and demucs
-          </p>
-        </li>
-        <li>
-          <a href="https://github.com/aaravpillai/generating-audio-with-lstm" target="_blank" rel="noopener">
-            generating audio with LSTMs
-          </a>
-          <p>
-          using lstms to make experimental game music, for indie developers and their very limited budgets          </p>
-        </li>
-         <li>
-          <a href="https://github.com/aaravpillai/compositional-pattern-producing-networks" target="_blank" rel="noopener">
-            compositional pattern producing networks
-          </a>
-          <p>
-          asking compositional pattern producing networks to take a turn at album artwork          </p>
-        </li>
-      </ul>
-    </section>
-<hr/>
-     <section class="research-projects" aria-labelledby="projects-heading">
-      <h2 id="projects-heading">msc dissertation</h2>
+    <ul class="project-list">
 
-      <ul class="project-list">
-        <li>
-          <a href="../assets/pdf/msc-thesis.pdf">read the dissertation (pdf)</a>
+      <li>
+        <a href="https://github.com/aaravpillai/text-readability-classifier" target="_blank" rel="noopener">
+          text readability classifier
+        </a>
+        <p>
+          experiments in readability assessment using cnns, distilbert, naive bayes, and t-sne.
+        </p>
+      </li>
 
-              <p style="font-style: italic; color:#4f6a5e;">
-      dissertation focus: timbre transfer, autistic stimming, and assistive sound design
+      <li>
+        <a href="https://github.com/aaravpillai/vaes-for-map-generation" target="_blank" rel="noopener">
+          variational autoencoders for map generation
+        </a>
+        <p>
+          generating fantasy maps for writers who would rather not draw coastlines by hand.
+        </p>
+      </li>
+
+      <li>
+        <a href="https://github.com/aaravpillai/image-clustering" target="_blank" rel="noopener">
+          image clustering
+        </a>
+        <p>
+          clustering brutalist buildings and oversized cats to soften architectural severity.
+        </p>
+      </li>
+
+      <li>
+        <a href="https://github.com/aaravpillai/feminist-chatbot?tab=readme-ov-file" target="_blank" rel="noopener">
+          feminist chatbot
+        </a>
+        <p>
+          xela — a gender-neutral chatbot for discovering diverse books, built around the pia standards framework.
+        </p>
+      </li>
+
+      <li>
+        <a href="https://github.com/aaravpillai/audio-reactive-stylegan" target="_blank" rel="noopener">
+          audio-reactive stylegan
+        </a>
+        <p>
+          experiments in offbeat music videos using lucid sonic dreams and demucs.
+        </p>
+      </li>
+
+      <li>
+        <a href="https://github.com/aaravpillai/generating-audio-with-lstm" target="_blank" rel="noopener">
+          generating audio with lstms
+        </a>
+        <p>
+          experimental game music for indie developers with limited budgets.
+        </p>
+      </li>
+
+      <li>
+        <a href="https://github.com/aaravpillai/compositional-pattern-producing-networks" target="_blank" rel="noopener">
+          compositional pattern producing networks
+        </a>
+        <p>
+          asking cppns to generate album artwork.
+        </p>
+      </li>
+
+    </ul>
+
+    <hr>
+
+    <h2>msc dissertation</h2>
+
+    <p class="aside">
+      timbre transfer, autistic stimming, and assistive sound design
     </p>
 
     <p>
       my dissertation explored how timbre-transfer models might be repurposed not for musical novelty, but for self-regulation; specifically to support autistic stimming practices rather than suppress them.
     </p>
 
-        </li>
+    <p>
+      <a href="../assets/pdf/msc-thesis.pdf">read the dissertation (pdf)</a>
+    </p>
+
   </main>
 
   <footer>
@@ -208,4 +283,3 @@
 
 </body>
 </html>
-
