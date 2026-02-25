@@ -5,8 +5,6 @@
 <title>aarav pillai</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<script src="https://unpkg.com/tone@14.7.77/build/Tone.js"></script>
-
 <style>
 :root{
   --accent:#e0f7fa;
@@ -22,27 +20,33 @@ body{
   line-height:1.75;
   color:var(--text);
   background:var(--bg);
-  transition:.4s;
   position:relative;
 }
 
 /* floating shapes */
-body::before,body::after{
+body::before,
+body::after{
   content:"";
   position:fixed;
   z-index:-1;
   border-radius:50%;
   opacity:.07;
 }
+
 body::before{
-  width:240px;height:240px;
+  width:240px;
+  height:240px;
   background:#cfc2ff;
-  top:120px;right:-100px;
+  top:120px;
+  right:-100px;
 }
+
 body::after{
-  width:180px;height:180px;
+  width:180px;
+  height:180px;
   background:#bde7ff;
-  bottom:160px;left:-80px;
+  bottom:160px;
+  left:-80px;
 }
 
 /* solid premium nav */
@@ -100,8 +104,14 @@ h1::after{
   z-index:-1;
 }
 
-h3{margin-top:3em}
-p{max-width:68ch}
+h3{
+  margin-top:3em;
+}
+
+p{
+  max-width:68ch;
+  margin-bottom:1.5em;
+}
 
 .aside{
   font-size:.9em;
@@ -111,8 +121,15 @@ p{max-width:68ch}
 }
 
 /* constellation */
-.research-wrap{margin-top:2.5em;position:relative}
-svg{width:100%;height:340px}
+.research-wrap{
+  margin-top:2.5em;
+  position:relative;
+}
+
+svg{
+  width:100%;
+  height:340px;
+}
 
 .node circle{
   cursor:pointer;
@@ -166,38 +183,6 @@ svg{width:100%;height:340px}
   display:none;
 }
 
-/* controls */
-.controls{
-  margin-top:28px;
-}
-
-button{
-  padding:7px 14px;
-  border:1px solid #ddd;
-  background:#fff;
-  cursor:pointer;
-  font-size:.8em;
-}
-
-button:hover{
-  background:#f2f2f2;
-}
-
-/* dark mode */
-.dark{
-  --bg:#111;
-  --text:#f5f5f5;
-}
-
-.dark nav{
-  background:#111;
-  border-bottom:1px solid #222;
-}
-
-.dark #research-info{
-  background:#1a1a1a;
-}
-
 footer{
   margin-top:90px;
   font-size:.85em;
@@ -223,15 +208,31 @@ footer{
 <h1>hello, i'm aarav pillai (he/him)</h1>
 
 <p>
-i work at the intersection of creative machine learning, healthcare ai, and internet governance. my research is less interested in spectacle than in consequence; what systems quietly assume, how they reshape practice once deployed, and which values become infrastructural through repetition. </p> <p> i currently lead research at <a href="https://qinara.org">qinārā ai lab</a>, where we build experimental creative systems while critically examining the power structures embedded within technical architectures. i previously worked as an associate lecturer at the ual creative computing institute, supporting postgraduate teaching across the msc data science & ai for the creative industries and ma/msc computing & creative industry programmes. </p> <p> before this, i also worked as an independent data scientist on public-sector and humanitarian projects. i am now preparing for doctoral research in computer science; a period marked by several annotated papers, evolving research questions, and too many open browser tabs. </p></p>
+i work at the intersection of creative machine learning, healthcare ai, and internet governance. my research is less interested in spectacle than in consequence; what systems quietly assume, how they reshape practice once deployed, and which values become infrastructural through repetition.
+</p>
+
+<p>
+i currently lead research at <a href="https://qinara.org">qinārā ai lab</a>, where we build experimental creative systems while critically examining the power structures embedded within technical architectures. i previously worked as an associate lecturer at the ual creative computing institute.
+</p>
+
+<p>
+before this, i worked as an independent data scientist on public-sector and humanitarian projects. i am now preparing for doctoral research in computer science.
+</p>
 
 <div class="aside">
 books taking up my attention:
 <a href="https://www.goodreads.com/aaravreviews">goodreads</a>
 </div>
 
-  <div class="aside"> curriculum vitae: <a href="assets/pdf/cv.pdf">download pdf</a> </div> 
-  <div class="aside"> evidence of structured internet learning: <a href="https://www.linkedin.com/in/apillaiwork/details/certifications/">mooc certifications</a> </div>
+<div class="aside">
+curriculum vitae:
+<a href="assets/pdf/cv.pdf">download pdf</a>
+</div>
+
+<div class="aside">
+evidence of structured internet learning:
+<a href="https://www.linkedin.com/in/apillaiwork/details/certifications/">mooc certifications</a>
+</div>
 
 <h3>current research interests</h3>
 
@@ -239,22 +240,22 @@ books taking up my attention:
 
 <svg viewBox="0 0 700 260">
 
-<g class="node" data-info="policy design, data governance." data-note="C4">
+<g class="node" data-info="policy design, data governance, infrastructural power.">
   <circle cx="200" cy="140" r="55" fill="#f8d7e8"/>
   <text x="200" y="145" text-anchor="middle">ai policy</text>
 </g>
 
-<g class="node" data-info="assistive systems, embodied ai." data-note="E4">
+<g class="node" data-info="assistive systems, embodied ai, clinical contexts.">
   <circle cx="360" cy="85" r="60" fill="#d6ecff"/>
   <text x="360" y="90" text-anchor="middle">healthcare ai</text>
 </g>
 
-<g class="node" data-info="adaptive design, neurodiversity." data-note="G4">
+<g class="node" data-info="adaptive design, neurodiversity, sound.">
   <circle cx="380" cy="175" r="65" fill="#dcf5e9"/>
   <text x="380" y="180" text-anchor="middle">accessibility</text>
 </g>
 
-<g class="node" data-info="generative systems, aesthetic computation." data-note="A4">
+<g class="node" data-info="generative systems, aesthetic computation.">
   <circle cx="520" cy="160" r="85" fill="#efe0ff"/>
   <text x="520" y="165" text-anchor="middle">creative ml</text>
 </g>
@@ -266,10 +267,6 @@ books taking up my attention:
 
 </div>
 
-<div class="controls">
-<button id="darkToggle">toggle dark mode</button>
-</div>
-
 </main>
 
 <footer>
@@ -277,39 +274,11 @@ copyright © aarav pillai. last revised january 2026.
 </footer>
 
 <script>
-let started=false;
-
-const pad=new Tone.PolySynth(Tone.Synth,{
-  oscillator:{type:"sine"},
-  envelope:{attack:2,release:4}
-}).toDestination();
-
-pad.volume.value=-18;
-
-const ambient=new Tone.Loop(time=>{
-  pad.triggerAttackRelease(["C4","G4","E4"],"2n",time);
-},"4n");
-
-function startAudio(){
-  if(!started){
-    Tone.start();
-    ambient.start(0);
-    Tone.Transport.start();
-    started=true;
-  }
-}
-
-document.body.addEventListener("click",startAudio,{once:true});
-
 const nodes=document.querySelectorAll(".node");
 const tooltip=document.getElementById("tooltip");
 const info=document.getElementById("research-info");
 
 nodes.forEach(node=>{
-  node.addEventListener("mouseenter",()=>{
-    pad.triggerAttackRelease(node.dataset.note,"8n");
-  });
-
   node.addEventListener("mousemove",e=>{
     tooltip.textContent=node.querySelector("text").textContent;
     tooltip.style.left=e.pageX+10+"px";
@@ -326,15 +295,6 @@ nodes.forEach(node=>{
     info.textContent=node.dataset.info;
   });
 });
-
-document.getElementById("darkToggle").onclick=()=>{
-  document.body.classList.toggle("dark");
-  pad.set({
-    oscillator:{
-      type: document.body.classList.contains("dark") ? "triangle" : "sine"
-    }
-  });
-};
 </script>
 
 </body>
