@@ -3,91 +3,144 @@
 <head>
   <meta charset="UTF-8">
   <title>photography — aarav pillai</title>
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      max-width: 700px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: 0 20px;
-      line-height: 1.6;
+      padding: 0 24px;
+      line-height: 1.7;
       color: #111;
-      background: #E0F7D9;
+      background: #ffffff;
+      position: relative;
     }
 
-    /* sage sticky nav — consistent across site */
+    /* subtle floating decorative shapes */
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      z-index: -1;
+      border-radius: 50%;
+      opacity: 0.08;
+    }
+
+    body::before {
+      width: 240px;
+      height: 240px;
+      background: #b388ff;
+      top: 120px;
+      right: -100px;
+    }
+
+    body::after {
+      width: 180px;
+      height: 180px;
+      background: #6ecbff;
+      bottom: 180px;
+      left: -80px;
+    }
+
+    /* nav */
     nav.site-nav {
       position: sticky;
       top: 0;
       z-index: 1000;
-
-      background: rgba(224, 247, 217, 0.94);
-      backdrop-filter: saturate(110%) blur(2px);
-
-      border-bottom: 1px solid rgba(79, 106, 94, 0.25);
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(3px);
+      border-bottom: 1px solid #eee;
     }
 
     .nav-inner {
-      max-width: 700px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: 0.6rem 20px;
+      padding: 0.7rem 24px;
       font-size: 0.85em;
       letter-spacing: 0.02em;
     }
 
     nav a {
-      margin-right: 18px;
-      color: #3f5f55;
+      margin-right: 20px;
+      color: #444;
       text-decoration: none;
+      position: relative;
     }
 
-    nav a:hover,
-    nav a:focus {
-      border-bottom: 1px solid #3f5f55;
-      outline: none;
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 1px;
+      bottom: -3px;
+      left: 0;
+      background: #000;
+      transition: width 0.2s ease;
     }
 
-    h1 {
-      font-size: 2.2em;
-      margin-bottom: 0.5em;
-      line-height: 1.25;
+    nav a:hover::after {
+      width: 100%;
     }
 
     main {
-      margin-top: 48px;
+      margin-top: 64px;
     }
 
-    /* photography gallery */
+    h1 {
+      font-size: 2.4em;
+      margin-bottom: 0.6em;
+      position: relative;
+      display: inline-block;
+    }
+
+    /* playful underline */
+    h1::after {
+      content: "";
+      position: absolute;
+      width: 110%;
+      height: 10px;
+      bottom: 6px;
+      left: -5%;
+      background: #e0f7fa;
+      z-index: -1;
+    }
 
     .photo-intro {
-      margin-bottom: 28px;
+      max-width: 68ch;
+      margin-bottom: 2em;
       color: #333;
     }
 
+    /* gallery */
     .photo-gallery {
       column-count: 2;
-      column-gap: 14px;
+      column-gap: 16px;
     }
 
     .photo-gallery img {
       width: 100%;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
       break-inside: avoid;
-      border-radius: 3px;
+      border-radius: 6px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
-    @media (max-width: 600px) {
+    .photo-gallery img:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+    }
+
+    @media (max-width: 700px) {
       .photo-gallery {
         column-count: 1;
       }
     }
 
     footer {
-      margin-top: 60px;
-      font-size: 0.9em;
-      color: #666;
+      margin-top: 100px;
+      font-size: 0.85em;
+      color: #777;
     }
   </style>
 </head>
@@ -105,6 +158,7 @@
   </nav>
 
   <main>
+
     <h1>photography</h1>
 
     <p class="photo-intro">
@@ -127,11 +181,8 @@
       <img src="./images/photo13.jpg" alt="">
       <img src="./images/photo14.jpg" alt="">
       <img src="./images/photo15.jpg" alt="">
-
-
-
-
     </section>
+
   </main>
 
   <footer>
@@ -140,4 +191,3 @@
 
 </body>
 </html>
-
