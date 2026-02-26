@@ -18,7 +18,7 @@ body{
   max-width:900px;
   margin:0 auto;
   padding:0 24px;
-  line-height:1.7;
+  line-height:1.75;
   color:var(--text);
   background:var(--bg);
 }
@@ -38,19 +38,28 @@ nav a{
 }
 
 h1{
-  font-size:2.4em;
-  margin:70px 0 20px;
+  font-size:2.5em;
+  margin:70px 0 18px;
 }
 
 canvas{
   width:100%;
-  height:420px;
   display:block;
+}
+
+#field{
+  height:420px;
   margin-top:40px;
 }
 
+#metrics{
+  height:150px;
+  margin-top:24px;
+  opacity:.9;
+}
+
 footer{
-  margin:80px 0;
+  margin:90px 0;
   font-size:.85em;
   color:#777;
 }
@@ -72,10 +81,19 @@ footer{
 <h1>hello, i'm aarav pillai (he/him)</h1>
 
 <p>
-i work across creative ml, healthcare ai, accessibility, and policy. this diagram is not decorative; it is a small behaving system.
+i build and study systems at the crossroads of creative ml, healthcare ai, accessibility, and internet governance. i care less about spectacle and more about infrastructure; what assumptions harden into defaults, what behaviours get nudged into normality, and how values sediment into code.
+</p>
+
+<p>
+i currently lead research at qinārā ai lab, designing experimental systems while interrogating the politics embedded inside them. before that, i taught at the ual creative computing institute; training students to both ship systems and side-eye them.
+</p>
+
+<p>
+below is not an illustration. it is a small behaving system. relationships emerge from proximity. centrality shifts. volatility is logged. interaction leaves residue.
 </p>
 
 <canvas id="field"></canvas>
+<canvas id="metrics"></canvas>
 
 </main>
 
@@ -84,71 +102,55 @@ copyright © aarav pillai. revised 2026.
 </footer>
 
 <script>
-const canvas = document.getElementById("field");
-const ctx = canvas.getContext("2d");
+const field = document.getElementById("field");
+const fctx = field.getContext("2d");
+const metrics = document.getElementById("metrics");
+const mctx = metrics.getContext("2d");
 
-canvas.width = canvas.offsetWidth;
-canvas.height = 420;
+field.width = field.offsetWidth;
+field.height = 420;
+metrics.width = metrics.offsetWidth;
+metrics.height = 150;
 
-/* ---- LOCAL SENTIMENT FIELD ---- */
-
-const policyCorpus = [
-  "regulation", "innovation", "risk", "governance",
-  "care", "bias", "safety", "equity",
-  "surveillance", "infrastructure", "rights"
-];
+/* ---------- SENTIMENT ENERGY ---------- */
 
 let sentimentEnergy = 0.25;
+setInterval(()=>{
+  sentimentEnergy = 0.15 + Math.random()*0.4;
+},6000);
 
-function updateSentiment(){
-  const randomWord = policyCorpus[Math.floor(Math.random()*policyCorpus.length)];
-
-  const chargedWords = ["risk","bias","surveillance"];
-  const stabilisingWords = ["care","equity","rights"];
-
-  if(chargedWords.includes(randomWord)){
-    sentimentEnergy = 0.45 + Math.random()*0.15;
-  } else if(stabilisingWords.includes(randomWord)){
-    sentimentEnergy = 0.12 + Math.random()*0.1;
-  } else {
-    sentimentEnergy = 0.25 + Math.random()*0.1;
-  }
-}
-
-setInterval(updateSentiment, 6000);
-updateSentiment();
-
-/* ---- NODE SYSTEM ---- */
+/* ---------- NODE CLASS ---------- */
 
 class Node{
-  constructor(x,y,r,label,color,freq){
-    this.x=x;
-    this.y=y;
-    this.baseX=x;
-    this.baseY=y;
-    this.vx=0;
-    this.vy=0;
-    this.r=r;
+  constructor(x,y,baseR,label,color,freq){
+    this.x=x; this.y=y;
+    this.baseX=x; this.baseY=y;
+    this.vx=0; this.vy=0;
+    this.baseR=baseR;
+    this.r=baseR;
     this.label=label;
     this.color=color;
     this.freq=freq;
+    this.centrality=1;
   }
 
   update(){
-    this.vx += (this.baseX - this.x) * 0.002;
-    this.vy += (this.baseY - this.y) * 0.002;
+    this.vx += (this.baseX-this.x)*0.002;
+    this.vy += (this.baseY-this.y)*0.002;
 
-    this.vx += (Math.random()-0.5) * sentimentEnergy;
-    this.vy += (Math.random()-0.5) * sentimentEnergy;
+    this.vx += (Math.random()-0.5)*sentimentEnergy;
+    this.vy += (Math.random()-0.5)*sentimentEnergy;
 
     this.vx *= 0.96;
     this.vy *= 0.96;
 
     this.x += this.vx;
     this.y += this.vy;
+
+    this.r = this.baseR + this.centrality*18;
   }
 
-  draw(){
+  draw(ctx){
     ctx.beginPath();
     ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
     ctx.fillStyle=this.color;
@@ -161,7 +163,7 @@ class Node{
   }
 
   contains(mx,my){
-    return Math.hypot(mx-this.x,my-this.y) < this.r;
+    return Math.hypot(mx-this.x,my-this.y)<this.r;
   }
 
   sonify(){
@@ -169,7 +171,7 @@ class Node{
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
 
-    osc.type="sine";
+    osc.type="triangle";
     osc.frequency.value=this.freq;
 
     gain.gain.setValueAtTime(0.2,audioCtx.currentTime);
@@ -184,45 +186,155 @@ class Node{
 }
 
 const nodes=[
-  new Node(180,200,50,"ai policy","#f8d7e8",220),
-  new Node(350,120,55,"healthcare ai","#d6ecff",261),
-  new Node(400,260,60,"accessibility","#dcf5e9",329),
-  new Node(620,200,70,"creative ml","#efe0ff",392)
+  new Node(180,220,45,"ai policy","#f8d7e8",220),
+  new Node(360,120,50,"healthcare ai","#d6ecff",261),
+  new Node(420,280,55,"accessibility","#dcf5e9",329),
+  new Node(650,210,65,"creative ml","#efe0ff",392)
 ];
 
-canvas.addEventListener("click",e=>{
-  const rect=canvas.getBoundingClientRect();
+/* ---------- ADJACENCY + EIGENVECTOR CENTRALITY ---------- */
+
+function computeAdjacency(){
+  const n = nodes.length;
+  const A = Array.from({length:n},()=>Array(n).fill(0));
+
+  for(let i=0;i<n;i++){
+    for(let j=i+1;j<n;j++){
+      const dist = Math.hypot(nodes[i].x-nodes[j].x,nodes[i].y-nodes[j].y);
+      if(dist<260){
+        const weight = 1 - dist/260;
+        A[i][j]=weight;
+        A[j][i]=weight;
+      }
+    }
+  }
+  return A;
+}
+
+function computeEigenvectorCentrality(A,iterations=15){
+  const n=A.length;
+  let v=Array(n).fill(1);
+
+  for(let k=0;k<iterations;k++){
+    let vNew=Array(n).fill(0);
+
+    for(let i=0;i<n;i++){
+      for(let j=0;j<n;j++){
+        vNew[i]+=A[i][j]*v[j];
+      }
+    }
+
+    const norm=Math.sqrt(vNew.reduce((s,x)=>s+x*x,0));
+    if(norm>0){
+      v=vNew.map(x=>x/norm);
+    }
+  }
+
+  return v;
+}
+
+/* ---------- INTERACTION MEMORY ---------- */
+
+let clickArchive=[];
+
+field.addEventListener("click",e=>{
+  const rect=field.getBoundingClientRect();
   const mx=e.clientX-rect.left;
   const my=e.clientY-rect.top;
+
   nodes.forEach(n=>{
-    if(n.contains(mx,my)) n.sonify();
+    if(n.contains(mx,my)){
+      n.sonify();
+      clickArchive.push({x:n.x,y:n.y,time:Date.now()});
+    }
   });
 });
+
+/* ---------- METRICS ---------- */
+
+let agitationHistory=[];
+
+function updateMetrics(){
+  const avgSpeed = nodes.reduce((s,n)=>s+Math.hypot(n.vx,n.vy),0)/nodes.length;
+  agitationHistory.push(avgSpeed);
+  if(agitationHistory.length>metrics.width){
+    agitationHistory.shift();
+  }
+
+  mctx.clearRect(0,0,metrics.width,metrics.height);
+
+  // energy bar
+  mctx.fillStyle="rgba(0,0,0,.1)";
+  mctx.fillRect(0,0,metrics.width,18);
+  mctx.fillStyle="rgba(0,0,0,.4)";
+  mctx.fillRect(0,0,metrics.width*sentimentEnergy,18);
+
+  // agitation trace
+  mctx.beginPath();
+  agitationHistory.forEach((v,i)=>{
+    const y=metrics.height - v*220;
+    if(i===0) mctx.moveTo(i,y);
+    else mctx.lineTo(i,y);
+  });
+  mctx.strokeStyle="#111";
+  mctx.stroke();
+
+  // centrality bars
+  nodes.forEach((n,i)=>{
+    mctx.fillStyle="rgba(0,0,0,.2)";
+    mctx.fillRect(i*150,metrics.height-12,n.centrality*140,6);
+  });
+}
+
+/* ---------- DRAW CONNECTIONS ---------- */
 
 function drawConnections(){
   for(let i=0;i<nodes.length;i++){
     for(let j=i+1;j<nodes.length;j++){
-      const dx=nodes[i].x-nodes[j].x;
-      const dy=nodes[i].y-nodes[j].y;
-      const dist=Math.hypot(dx,dy);
-
+      const dist=Math.hypot(nodes[i].x-nodes[j].x,nodes[i].y-nodes[j].y);
       if(dist<260){
-        ctx.beginPath();
-        ctx.moveTo(nodes[i].x,nodes[i].y);
-        ctx.lineTo(nodes[j].x,nodes[j].y);
-        ctx.strokeStyle="rgba(0,0,0,"+(1-dist/260)*0.25+")";
-        ctx.stroke();
+        fctx.beginPath();
+        fctx.moveTo(nodes[i].x,nodes[i].y);
+        fctx.lineTo(nodes[j].x,nodes[j].y);
+        fctx.strokeStyle="rgba(0,0,0,"+(1-dist/260)*0.25+")";
+        fctx.stroke();
       }
     }
   }
 }
 
+/* ---------- GHOST MEMORY ---------- */
+
+function drawArchive(){
+  clickArchive.forEach(entry=>{
+    const age=(Date.now()-entry.time)/1000;
+    if(age<20){
+      fctx.beginPath();
+      fctx.arc(entry.x,entry.y,10+age*2,0,Math.PI*2);
+      fctx.strokeStyle="rgba(0,0,0,"+(1-age/20)*0.2+")";
+      fctx.stroke();
+    }
+  });
+}
+
+/* ---------- ANIMATION LOOP ---------- */
+
 function animate(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  const A = computeAdjacency();
+  const centralities = computeEigenvectorCentrality(A);
+
+  centralities.forEach((c,i)=>{
+    nodes[i].centrality = c;
+  });
+
+  fctx.clearRect(0,0,field.width,field.height);
 
   nodes.forEach(n=>n.update());
   drawConnections();
-  nodes.forEach(n=>n.draw());
+  nodes.forEach(n=>n.draw(fctx));
+  drawArchive();
+  updateMetrics();
 
   requestAnimationFrame(animate);
 }
@@ -230,7 +342,8 @@ function animate(){
 animate();
 
 window.addEventListener("resize",()=>{
-  canvas.width=canvas.offsetWidth;
+  field.width=field.offsetWidth;
+  metrics.width=metrics.offsetWidth;
 });
 </script>
 
