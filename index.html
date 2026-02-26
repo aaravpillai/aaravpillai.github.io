@@ -3,300 +3,269 @@
 <head>
 <meta charset="UTF-8">
 <title>aarav pillai</title>
-  <!-- favicon -->
-<link rel="icon" type="image/png" href="/favicon.png">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="favicon.png">
 
 <style>
-:root{
-  --accent:#e0f7fa;
-  --text:#111;
-  --bg:#ffffff;
+html,body{
+  margin:0;
+  height:100%;
+  overflow:hidden;
+  font-family:"Lucida Grande", "Helvetica Neue", sans-serif;
+  background:linear-gradient(#7fa6d9,#4b6fa8);
 }
 
-body{
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  max-width:760px;
-  margin:0 auto;
-  padding:0 24px;
-  line-height:1.75;
-  color:var(--text);
-  background:var(--bg);
-  position:relative;
-}
+/* ===== MENU BAR ===== */
 
-/* floating shapes */
-body::before,
-body::after{
-  content:"";
+.menubar{
   position:fixed;
-  z-index:-1;
-  border-radius:50%;
-  opacity:.07;
-}
-
-body::before{
-  width:240px;
-  height:240px;
-  background:#cfc2ff;
-  top:120px;
-  right:-100px;
-}
-
-body::after{
-  width:180px;
-  height:180px;
-  background:#bde7ff;
-  bottom:160px;
-  left:-80px;
-}
-
-/* solid premium nav */
-nav{
-  position:sticky;
   top:0;
-  z-index:1000;
-  background:#ffffff;
-  border-bottom:1px solid #ececec;
-  box-shadow:0 4px 20px rgba(0,0,0,0.04);
-}
-
-.nav-inner{
-  padding:.75rem 0;
-  font-size:.85em;
-}
-
-nav a{
-  margin-right:22px;
-  color:#444;
-  text-decoration:none;
-  position:relative;
-}
-
-nav a::after{
-  content:"";
-  position:absolute;
-  width:0%;
-  height:1px;
-  bottom:-4px;
   left:0;
-  background:#000;
-  transition:.2s;
+  right:0;
+  height:24px;
+  background:linear-gradient(#e8e8e8,#cfcfcf);
+  border-bottom:1px solid #aaa;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 10px;
+  font-size:13px;
+  z-index:1000;
 }
 
-nav a:hover::after{
-  width:100%;
-}
-
-h1{
-  font-size:2.5em;
-  margin:72px 0 16px;
-  position:relative;
-  display:inline-block;
-}
-
-h1::after{
-  content:"";
-  position:absolute;
-  width:110%;
-  height:12px;
-  bottom:8px;
-  left:-5%;
-  background:var(--accent);
-  z-index:-1;
-}
-
-h3{
-  margin-top:3em;
-}
-
-p{
-  max-width:68ch;
-  margin-bottom:1.5em;
-}
-
-.aside{
-  font-size:.9em;
-  border-left:3px solid #eee;
-  padding-left:14px;
-  margin:2em 0;
-}
-
-/* constellation */
-.research-wrap{
-  margin-top:2.5em;
-  position:relative;
-}
-
-svg{
-  width:100%;
-  height:340px;
-}
-
-.node circle{
+.menubar .left span{
+  margin-right:14px;
   cursor:pointer;
-  transition:.3s;
-  opacity:.9;
 }
 
-.node:hover circle{
-  transform:scale(1.08);
-  filter:drop-shadow(0 8px 22px rgba(0,0,0,.15));
+.menubar .right{
+  font-weight:500;
 }
 
-.node text{
-  fill:#333;
-  font-size:14px;
-  pointer-events:none;
-}
+/* ===== DESKTOP ===== */
 
-.node{
-  animation:float 6s ease-in-out infinite;
-}
-
-.node:nth-child(2){animation-delay:1s}
-.node:nth-child(3){animation-delay:2s}
-.node:nth-child(4){animation-delay:3s}
-
-@keyframes float{
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-6px)}
-  100%{transform:translateY(0)}
-}
-
-.tooltip{
+.desktop{
   position:absolute;
-  background:#111;
-  color:#fff;
-  font-size:12px;
-  padding:6px 10px;
-  border-radius:6px;
-  pointer-events:none;
-  opacity:0;
+  top:24px;
+  bottom:80px;
+  left:0;
+  right:0;
+}
+
+/* ===== WINDOWS ===== */
+
+.window{
+  position:absolute;
+  width:420px;
+  background:#f2f2f2;
+  border-radius:8px;
+  box-shadow:0 20px 40px rgba(0,0,0,.3);
+  overflow:hidden;
+  cursor:grab;
+}
+
+.titlebar{
+  background:linear-gradient(#dcdcdc,#bfbfbf);
+  height:28px;
+  display:flex;
+  align-items:center;
+  padding:0 10px;
+}
+
+.traffic{
+  display:flex;
+  gap:6px;
+  margin-right:10px;
+}
+
+.dot{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+}
+
+.red{background:#ff5f57;}
+.yellow{background:#ffbd2e;}
+.green{background:#28c840;}
+
+.title{
+  font-size:13px;
+  color:#333;
+}
+
+.content{
+  padding:18px;
+  font-size:14px;
+  line-height:1.6;
+  color:#222;
+}
+
+/* ===== DOCK ===== */
+
+.dock{
+  position:fixed;
+  bottom:10px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(255,255,255,.25);
+  backdrop-filter:blur(8px);
+  padding:8px 14px;
+  border-radius:16px;
+  display:flex;
+  gap:18px;
+  align-items:flex-end;
+}
+
+.dock-icon{
+  font-size:32px;
+  cursor:pointer;
   transition:.2s;
 }
 
-#research-info{
-  margin-top:1.2em;
-  font-size:.95em;
-  padding:14px;
-  background:#f8f8f8;
-  border-left:4px solid var(--accent);
-  display:none;
+.dock-icon:hover{
+  transform:scale(1.4) translateY(-8px);
 }
 
-footer{
-  margin-top:90px;
-  font-size:.85em;
-  color:#777;
+/* ===== subtle desktop icons ===== */
+
+.icon{
+  position:absolute;
+  width:70px;
+  text-align:center;
+  color:white;
+  font-size:13px;
+  cursor:pointer;
 }
+
+.icon span{
+  font-size:32px;
+  display:block;
+}
+
 </style>
 </head>
 
 <body>
 
-<nav>
-  <div class="nav-inner">
-    <a href="/">home</a>
-    <a href="/research/">research</a>
-    <a href="/writing/">writing</a>
-    <a href="/photography/">photography</a>
-    <a href="/contact/">contact</a>
+<div class="menubar">
+  <div class="left">
+    <span></span>
+    <span>aarav</span>
+    <span>file</span>
+    <span>edit</span>
+    <span>view</span>
   </div>
-</nav>
-
-<main>
-
-<h1>hello, i'm aarav pillai (he/him)</h1>
-
-<p>
-i build and study systems at the crossroads of creative ml, healthcare ai, and internet governance. i care less about what dazzles on stage and more about what lingers in policy, clinics, and codebases; the assumptions baked in, the behaviors reshaped, and the values that turn into defaults through repetition.</p>
-
-<p>
-i currently lead research at <a href="https://qinara.org">qinārā ai lab</a>, designing experimental creative systems while asking uncomfortable questions about the values quietly embedded in their code. before that, i taught at the ual creative computing institute on the msc data science and ai for the creative industries and the ma/msc creative computing programmes; training the next generation to both ship systems and side-eye them.</p>
-
-<p>
-before this, i worked as an independent data scientist on public-sector and humanitarian projects; building systems that had to work beyond ideal conditions. i am now preparing for doctoral research; a phase characterised by over-annotated pdfs, an unreasonable number of open tabs, and research questions that evolve faster than my version control can keep up.</p>
-
-<div class="aside">
-books taking up my attention:
-<a href="https://www.goodreads.com/aaravreviews">goodreads</a>
+  <div class="right" id="clock"></div>
 </div>
 
-<div class="aside">
-structured proof of employability:
-<a href="assets/pdf/cv.pdf">download cv</a>
+<div class="desktop" id="desktop">
+
+<div class="icon" style="top:60px;left:40px;" onclick="openWindow('about')">
+  <span>📁</span>
+  about
 </div>
 
-<div class="aside">
-evidence of self-directed learning:
-<a href="https://www.linkedin.com/in/apillaiwork/details/certifications/">mooc certifications</a>
+<div class="icon" style="top:160px;left:40px;" onclick="openWindow('research')">
+  <span>🧠</span>
+  research
 </div>
 
-<h3>current research interests</h3>
-
-<div class="research-wrap">
-
-<svg viewBox="0 0 700 260">
-
-<g class="node" data-info="policy design, data governance, infrastructural power.">
-  <circle cx="200" cy="140" r="55" fill="#f8d7e8"/>
-  <text x="200" y="145" text-anchor="middle">ai policy</text>
-</g>
-
-<g class="node" data-info="assistive systems, embodied ai, clinical contexts.">
-  <circle cx="360" cy="85" r="60" fill="#d6ecff"/>
-  <text x="360" y="90" text-anchor="middle">healthcare ai</text>
-</g>
-
-<g class="node" data-info="adaptive design, neurodiversity, sound.">
-  <circle cx="380" cy="175" r="65" fill="#dcf5e9"/>
-  <text x="380" y="180" text-anchor="middle">accessibility</text>
-</g>
-
-<g class="node" data-info="generative systems, aesthetic computation.">
-  <circle cx="520" cy="160" r="85" fill="#efe0ff"/>
-  <text x="520" y="165" text-anchor="middle">creative ml</text>
-</g>
-
-</svg>
-
-<div id="tooltip" class="tooltip"></div>
-<div id="research-info"></div>
+<div class="icon" style="top:260px;left:40px;" onclick="openWindow('contact')">
+  <span>✉️</span>
+  contact
+</div>
 
 </div>
 
-</main>
-
-<footer>
-copyright © aarav pillai. last revised january 2026.
-</footer>
+<div class="dock">
+  <div class="dock-icon" onclick="openWindow('about')">📁</div>
+  <div class="dock-icon" onclick="openWindow('research')">🧠</div>
+  <div class="dock-icon" onclick="openWindow('contact')">✉️</div>
+  <div class="dock-icon">🗑</div>
+</div>
 
 <script>
-const nodes=document.querySelectorAll(".node");
-const tooltip=document.getElementById("tooltip");
-const info=document.getElementById("research-info");
 
-nodes.forEach(node=>{
-  node.addEventListener("mousemove",e=>{
-    tooltip.textContent=node.querySelector("text").textContent;
-    tooltip.style.left=e.pageX+10+"px";
-    tooltip.style.top=e.pageY-30+"px";
-    tooltip.style.opacity=1;
-  });
+/* ===== CLOCK ===== */
+function updateClock(){
+  const now=new Date();
+  document.getElementById("clock").textContent=
+    now.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+}
+setInterval(updateClock,1000);
+updateClock();
 
-  node.addEventListener("mouseleave",()=>{
-    tooltip.style.opacity=0;
-  });
+/* ===== WINDOW DATA ===== */
 
-  node.addEventListener("click",()=>{
-    info.style.display="block";
-    info.textContent=node.dataset.info;
+const windowsData={
+  about:{
+    title:"about aarav",
+    content:`i build systems across creative ml, healthcare ai, and policy.
+    i care about infrastructure; what becomes default; what becomes invisible.`
+  },
+  research:{
+    title:"research",
+    content:`creative machine learning; embodied ai; accessibility; governance.
+    currently preparing for doctoral work.`
+  },
+  contact:{
+    title:"contact",
+    content:`email: hello@aaravpillai.com<br>
+    github / linkedin / etc.`
+  }
+};
+
+/* ===== WINDOW SYSTEM ===== */
+
+let zIndexCounter=10;
+
+function openWindow(type){
+
+  const data=windowsData[type];
+  const win=document.createElement("div");
+  win.className="window";
+  win.style.top=(120+Math.random()*120)+"px";
+  win.style.left=(200+Math.random()*200)+"px";
+  win.style.zIndex=++zIndexCounter;
+
+  win.innerHTML=`
+    <div class="titlebar">
+      <div class="traffic">
+        <div class="dot red" onclick="this.closest('.window').remove()"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+      </div>
+      <div class="title">${data.title}</div>
+    </div>
+    <div class="content">${data.content}</div>
+  `;
+
+  makeDraggable(win);
+  document.body.appendChild(win);
+}
+
+/* ===== DRAGGING ===== */
+
+function makeDraggable(el){
+  let offsetX=0, offsetY=0;
+
+  el.querySelector(".titlebar").addEventListener("mousedown",e=>{
+    el.style.zIndex=++zIndexCounter;
+    offsetX=e.clientX-el.offsetLeft;
+    offsetY=e.clientY-el.offsetTop;
+
+    function move(ev){
+      el.style.left=(ev.clientX-offsetX)+"px";
+      el.style.top=(ev.clientY-offsetY)+"px";
+    }
+
+    document.addEventListener("mousemove",move);
+    document.addEventListener("mouseup",()=>{
+      document.removeEventListener("mousemove",move);
+    },{once:true});
   });
-});
+}
+
 </script>
 
 </body>
