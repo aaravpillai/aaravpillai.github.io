@@ -3,338 +3,259 @@
 <head>
 <meta charset="UTF-8">
 <title>aarav pillai</title>
-
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 :root{
-  --bg:#ffffff;
+  --bg:#fdfdfd;
   --text:#111;
 }
 
 body{
+  margin:0;
+  overflow:hidden;
   font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  max-width:900px;
-  margin:0 auto;
-  padding:0 24px;
-  line-height:1.75;
-  color:var(--text);
   background:var(--bg);
+  color:var(--text);
 }
 
-nav{
-  position:sticky;
+/* subtle cargo-like grid */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    linear-gradient(rgba(0,0,0,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,.03) 1px, transparent 1px);
+  background-size:40px 40px;
+  pointer-events:none;
+}
+
+/* top bar */
+.topbar{
+  position:fixed;
   top:0;
+  left:0;
+  right:0;
+  height:38px;
   background:#fff;
+  border-bottom:1px solid #e5e5e5;
+  display:flex;
+  align-items:center;
+  padding:0 16px;
+  font-size:.9em;
+  z-index:1000;
+}
+
+.desktop{
+  position:absolute;
+  top:38px;
+  left:0;
+  right:0;
+  bottom:0;
+}
+
+/* draggable windows */
+.window{
+  position:absolute;
+  width:260px;
+  background:#fff;
+  border:1px solid #ddd;
+  box-shadow:0 8px 30px rgba(0,0,0,.08);
+  border-radius:6px;
+  cursor:grab;
+}
+
+.window-header{
+  padding:8px 10px;
+  font-size:.8em;
+  background:#fafafa;
   border-bottom:1px solid #eee;
-  padding:.8rem 0;
 }
 
-nav a{
-  margin-right:22px;
-  text-decoration:none;
-  color:#444;
-}
-
-h1{
-  font-size:2.5em;
-  margin:70px 0 18px;
+.window-content{
+  padding:12px;
+  font-size:.85em;
+  line-height:1.5;
 }
 
 canvas{
-  width:100%;
-  display:block;
-}
-
-#field{
-  height:420px;
-  margin-top:40px;
-}
-
-#metrics{
-  height:150px;
-  margin-top:24px;
-  opacity:.9;
-}
-
-footer{
-  margin:90px 0;
-  font-size:.85em;
-  color:#777;
+  position:absolute;
+  inset:0;
+  pointer-events:none;
 }
 </style>
 </head>
-
 <body>
 
-<nav>
-  <a href="/">home</a>
-  <a href="/research/">research</a>
-  <a href="/writing/">writing</a>
-  <a href="/photography/">photography</a>
-  <a href="/contact/">contact</a>
-</nav>
+<div class="topbar">
+aarav pillai — infrastructure playground
+</div>
 
-<main>
+<div class="desktop" id="desktop">
 
-<h1>hello, i'm aarav pillai (he/him)</h1>
+<canvas id="network"></canvas>
 
-<p>
-i build and study systems at the crossroads of creative ml, healthcare ai, accessibility, and internet governance. i care less about spectacle and more about infrastructure; what assumptions harden into defaults, what behaviours get nudged into normality, and how values sediment into code.
-</p>
+<div class="window" style="top:80px; left:120px;">
+  <div class="window-header">creative ml</div>
+  <div class="window-content">
+    generative systems; aesthetic computation; sonic models.
+  </div>
+</div>
 
-<p>
-i currently lead research at qinārā ai lab, designing experimental systems while interrogating the politics embedded inside them. before that, i taught at the ual creative computing institute; training students to both ship systems and side-eye them.
-</p>
+<div class="window" style="top:200px; left:450px;">
+  <div class="window-header">healthcare ai</div>
+  <div class="window-content">
+    assistive systems; embodied ai; clinical infrastructures.
+  </div>
+</div>
 
-<p>
-below is not an illustration. it is a small behaving system. relationships emerge from proximity. centrality shifts. volatility is logged. interaction leaves residue.
-</p>
+<div class="window" style="top:300px; left:220px;">
+  <div class="window-header">ai policy</div>
+  <div class="window-content">
+    governance; infrastructural power; data politics.
+  </div>
+</div>
 
-<canvas id="field"></canvas>
-<canvas id="metrics"></canvas>
+<div class="window" style="top:120px; left:700px;">
+  <div class="window-header">accessibility</div>
+  <div class="window-content">
+    adaptive systems; neurodiversity; sonic interaction.
+  </div>
+</div>
 
-</main>
-
-<footer>
-copyright © aarav pillai. revised 2026.
-</footer>
+</div>
 
 <script>
-const field = document.getElementById("field");
-const fctx = field.getContext("2d");
-const metrics = document.getElementById("metrics");
-const mctx = metrics.getContext("2d");
+const canvas=document.getElementById("network");
+const ctx=canvas.getContext("2d");
+const desktop=document.getElementById("desktop");
 
-field.width = field.offsetWidth;
-field.height = 420;
-metrics.width = metrics.offsetWidth;
-metrics.height = 150;
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
 
-/* ---------- SENTIMENT ENERGY ---------- */
+/* ---------- DRAG SYSTEM ---------- */
 
-let sentimentEnergy = 0.25;
-setInterval(()=>{
-  sentimentEnergy = 0.15 + Math.random()*0.4;
-},6000);
+let active=null;
+let offsetX=0;
+let offsetY=0;
 
-/* ---------- NODE CLASS ---------- */
-
-class Node{
-  constructor(x,y,baseR,label,color,freq){
-    this.x=x; this.y=y;
-    this.baseX=x; this.baseY=y;
-    this.vx=0; this.vy=0;
-    this.baseR=baseR;
-    this.r=baseR;
-    this.label=label;
-    this.color=color;
-    this.freq=freq;
-    this.centrality=1;
-  }
-
-  update(){
-    this.vx += (this.baseX-this.x)*0.002;
-    this.vy += (this.baseY-this.y)*0.002;
-
-    this.vx += (Math.random()-0.5)*sentimentEnergy;
-    this.vy += (Math.random()-0.5)*sentimentEnergy;
-
-    this.vx *= 0.96;
-    this.vy *= 0.96;
-
-    this.x += this.vx;
-    this.y += this.vy;
-
-    this.r = this.baseR + this.centrality*18;
-  }
-
-  draw(ctx){
-    ctx.beginPath();
-    ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
-    ctx.fillStyle=this.color;
-    ctx.fill();
-
-    ctx.fillStyle="#111";
-    ctx.font="14px system-ui";
-    ctx.textAlign="center";
-    ctx.fillText(this.label,this.x,this.y+4);
-  }
-
-  contains(mx,my){
-    return Math.hypot(mx-this.x,my-this.y)<this.r;
-  }
-
-  sonify(){
-    const audioCtx = new (window.AudioContext||window.webkitAudioContext)();
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-
-    osc.type="triangle";
-    osc.frequency.value=this.freq;
-
-    gain.gain.setValueAtTime(0.2,audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001,audioCtx.currentTime+2);
-
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-
-    osc.start();
-    osc.stop(audioCtx.currentTime+2);
-  }
-}
-
-const nodes=[
-  new Node(180,220,45,"ai policy","#f8d7e8",220),
-  new Node(360,120,50,"healthcare ai","#d6ecff",261),
-  new Node(420,280,55,"accessibility","#dcf5e9",329),
-  new Node(650,210,65,"creative ml","#efe0ff",392)
-];
-
-/* ---------- ADJACENCY + EIGENVECTOR CENTRALITY ---------- */
-
-function computeAdjacency(){
-  const n = nodes.length;
-  const A = Array.from({length:n},()=>Array(n).fill(0));
-
-  for(let i=0;i<n;i++){
-    for(let j=i+1;j<n;j++){
-      const dist = Math.hypot(nodes[i].x-nodes[j].x,nodes[i].y-nodes[j].y);
-      if(dist<260){
-        const weight = 1 - dist/260;
-        A[i][j]=weight;
-        A[j][i]=weight;
-      }
-    }
-  }
-  return A;
-}
-
-function computeEigenvectorCentrality(A,iterations=15){
-  const n=A.length;
-  let v=Array(n).fill(1);
-
-  for(let k=0;k<iterations;k++){
-    let vNew=Array(n).fill(0);
-
-    for(let i=0;i<n;i++){
-      for(let j=0;j<n;j++){
-        vNew[i]+=A[i][j]*v[j];
-      }
-    }
-
-    const norm=Math.sqrt(vNew.reduce((s,x)=>s+x*x,0));
-    if(norm>0){
-      v=vNew.map(x=>x/norm);
-    }
-  }
-
-  return v;
-}
-
-/* ---------- INTERACTION MEMORY ---------- */
-
-let clickArchive=[];
-
-field.addEventListener("click",e=>{
-  const rect=field.getBoundingClientRect();
-  const mx=e.clientX-rect.left;
-  const my=e.clientY-rect.top;
-
-  nodes.forEach(n=>{
-    if(n.contains(mx,my)){
-      n.sonify();
-      clickArchive.push({x:n.x,y:n.y,time:Date.now()});
-    }
+document.querySelectorAll(".window").forEach(win=>{
+  win.addEventListener("mousedown",e=>{
+    active=win;
+    offsetX=e.clientX-win.offsetLeft;
+    offsetY=e.clientY-win.offsetTop;
+    win.style.cursor="grabbing";
   });
 });
 
-/* ---------- METRICS ---------- */
-
-let agitationHistory=[];
-
-function updateMetrics(){
-  const avgSpeed = nodes.reduce((s,n)=>s+Math.hypot(n.vx,n.vy),0)/nodes.length;
-  agitationHistory.push(avgSpeed);
-  if(agitationHistory.length>metrics.width){
-    agitationHistory.shift();
+document.addEventListener("mousemove",e=>{
+  if(active){
+    active.style.left=(e.clientX-offsetX)+"px";
+    active.style.top=(e.clientY-offsetY)+"px";
   }
+});
 
-  mctx.clearRect(0,0,metrics.width,metrics.height);
+document.addEventListener("mouseup",()=>{
+  if(active){
+    active.style.cursor="grab";
+  }
+  active=null;
+});
 
-  // energy bar
-  mctx.fillStyle="rgba(0,0,0,.1)";
-  mctx.fillRect(0,0,metrics.width,18);
-  mctx.fillStyle="rgba(0,0,0,.4)";
-  mctx.fillRect(0,0,metrics.width*sentimentEnergy,18);
+/* ---------- NETWORK GAME ---------- */
 
-  // agitation trace
-  mctx.beginPath();
-  agitationHistory.forEach((v,i)=>{
-    const y=metrics.height - v*220;
-    if(i===0) mctx.moveTo(i,y);
-    else mctx.lineTo(i,y);
-  });
-  mctx.strokeStyle="#111";
-  mctx.stroke();
-
-  // centrality bars
-  nodes.forEach((n,i)=>{
-    mctx.fillStyle="rgba(0,0,0,.2)";
-    mctx.fillRect(i*150,metrics.height-12,n.centrality*140,6);
+function getCenters(){
+  return [...document.querySelectorAll(".window")].map(w=>{
+    return {
+      el:w,
+      x:w.offsetLeft+w.offsetWidth/2,
+      y:w.offsetTop+w.offsetHeight/2
+    }
   });
 }
 
-/* ---------- DRAW CONNECTIONS ---------- */
+/* eigenvector centrality */
+function computeCentrality(nodes){
+  const n=nodes.length;
+  const A=Array.from({length:n},()=>Array(n).fill(0));
 
-function drawConnections(){
-  for(let i=0;i<nodes.length;i++){
-    for(let j=i+1;j<nodes.length;j++){
-      const dist=Math.hypot(nodes[i].x-nodes[j].x,nodes[i].y-nodes[j].y);
-      if(dist<260){
-        fctx.beginPath();
-        fctx.moveTo(nodes[i].x,nodes[i].y);
-        fctx.lineTo(nodes[j].x,nodes[j].y);
-        fctx.strokeStyle="rgba(0,0,0,"+(1-dist/260)*0.25+")";
-        fctx.stroke();
+  for(let i=0;i<n;i++){
+    for(let j=i+1;j<n;j++){
+      const dx=nodes[i].x-nodes[j].x;
+      const dy=nodes[i].y-nodes[j].y;
+      const dist=Math.hypot(dx,dy);
+      if(dist<300){
+        const w=1-dist/300;
+        A[i][j]=w;
+        A[j][i]=w;
       }
     }
   }
-}
 
-/* ---------- GHOST MEMORY ---------- */
-
-function drawArchive(){
-  clickArchive.forEach(entry=>{
-    const age=(Date.now()-entry.time)/1000;
-    if(age<20){
-      fctx.beginPath();
-      fctx.arc(entry.x,entry.y,10+age*2,0,Math.PI*2);
-      fctx.strokeStyle="rgba(0,0,0,"+(1-age/20)*0.2+")";
-      fctx.stroke();
+  let v=Array(n).fill(1);
+  for(let k=0;k<10;k++){
+    let v2=Array(n).fill(0);
+    for(let i=0;i<n;i++){
+      for(let j=0;j<n;j++){
+        v2[i]+=A[i][j]*v[j];
+      }
     }
-  });
+    const norm=Math.sqrt(v2.reduce((s,x)=>s+x*x,0));
+    if(norm>0) v=v2.map(x=>x/norm);
+  }
+  return v;
 }
 
-/* ---------- ANIMATION LOOP ---------- */
+/* audio */
+function playTone(freq){
+  const audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  const osc=audioCtx.createOscillator();
+  const gain=audioCtx.createGain();
+  osc.type="sine";
+  osc.frequency.value=freq;
+  gain.gain.setValueAtTime(.15,audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+1.5);
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  osc.start();
+  osc.stop(audioCtx.currentTime+1.5);
+}
 
-function animate(){
-
-  const A = computeAdjacency();
-  const centralities = computeEigenvectorCentrality(A);
-
-  centralities.forEach((c,i)=>{
-    nodes[i].centrality = c;
+/* click game */
+document.querySelectorAll(".window").forEach((w,i)=>{
+  w.addEventListener("dblclick",()=>{
+    playTone(220+ i*80);
   });
+});
 
-  fctx.clearRect(0,0,field.width,field.height);
+/* render loop */
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  const nodes=getCenters();
+  const centrality=computeCentrality(nodes);
 
-  nodes.forEach(n=>n.update());
-  drawConnections();
-  nodes.forEach(n=>n.draw(fctx));
-  drawArchive();
-  updateMetrics();
+  for(let i=0;i<nodes.length;i++){
+    for(let j=i+1;j<nodes.length;j++){
+      const dx=nodes[i].x-nodes[j].x;
+      const dy=nodes[i].y-nodes[j].y;
+      const dist=Math.hypot(dx,dy);
+
+      if(dist<300){
+        ctx.beginPath();
+        ctx.moveTo(nodes[i].x,nodes[i].y);
+        ctx.lineTo(nodes[j].x,nodes[j].y);
+        ctx.strokeStyle="rgba(0,0,0,"+(1-dist/300)*0.25+")";
+        ctx.stroke();
+      }
+    }
+  }
+
+  nodes.forEach((node,i)=>{
+    node.el.style.boxShadow=
+      "0 8px 30px rgba(0,0,0,.08), 0 0 "+(centrality[i]*40)+"px rgba(0,0,0,.15)";
+  });
 
   requestAnimationFrame(animate);
 }
@@ -342,8 +263,8 @@ function animate(){
 animate();
 
 window.addEventListener("resize",()=>{
-  field.width=field.offsetWidth;
-  metrics.width=metrics.offsetWidth;
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
 });
 </script>
 
