@@ -3,268 +3,299 @@
 <head>
 <meta charset="UTF-8">
 <title>aarav pillai</title>
-<link rel="icon" type="image/png" href="favicon.png">
+  <!-- favicon -->
+<link rel="icon" type="image/png" href="/favicon.png">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 :root{
-  --bg:#fdfdfd;
+  --accent:#e0f7fa;
   --text:#111;
+  --bg:#ffffff;
 }
 
 body{
-  margin:0;
-  overflow:hidden;
   font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:var(--bg);
+  max-width:760px;
+  margin:0 auto;
+  padding:0 24px;
+  line-height:1.75;
   color:var(--text);
+  background:var(--bg);
+  position:relative;
 }
 
-/* subtle cargo-like grid */
-body::before{
+/* floating shapes */
+body::before,
+body::after{
   content:"";
   position:fixed;
-  inset:0;
-  background:
-    linear-gradient(rgba(0,0,0,.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,0,0,.03) 1px, transparent 1px);
-  background-size:40px 40px;
-  pointer-events:none;
+  z-index:-1;
+  border-radius:50%;
+  opacity:.07;
 }
 
-/* top bar */
-.topbar{
-  position:fixed;
+body::before{
+  width:240px;
+  height:240px;
+  background:#cfc2ff;
+  top:120px;
+  right:-100px;
+}
+
+body::after{
+  width:180px;
+  height:180px;
+  background:#bde7ff;
+  bottom:160px;
+  left:-80px;
+}
+
+/* solid premium nav */
+nav{
+  position:sticky;
   top:0;
-  left:0;
-  right:0;
-  height:38px;
-  background:#fff;
-  border-bottom:1px solid #e5e5e5;
-  display:flex;
-  align-items:center;
-  padding:0 16px;
-  font-size:.9em;
   z-index:1000;
+  background:#ffffff;
+  border-bottom:1px solid #ececec;
+  box-shadow:0 4px 20px rgba(0,0,0,0.04);
 }
 
-.desktop{
-  position:absolute;
-  top:38px;
-  left:0;
-  right:0;
-  bottom:0;
-}
-
-/* draggable windows */
-.window{
-  position:absolute;
-  width:260px;
-  background:#fff;
-  border:1px solid #ddd;
-  box-shadow:0 8px 30px rgba(0,0,0,.08);
-  border-radius:6px;
-  cursor:grab;
-}
-
-.window-header{
-  padding:8px 10px;
-  font-size:.8em;
-  background:#fafafa;
-  border-bottom:1px solid #eee;
-}
-
-.window-content{
-  padding:12px;
+.nav-inner{
+  padding:.75rem 0;
   font-size:.85em;
-  line-height:1.5;
 }
 
-canvas{
+nav a{
+  margin-right:22px;
+  color:#444;
+  text-decoration:none;
+  position:relative;
+}
+
+nav a::after{
+  content:"";
   position:absolute;
-  inset:0;
+  width:0%;
+  height:1px;
+  bottom:-4px;
+  left:0;
+  background:#000;
+  transition:.2s;
+}
+
+nav a:hover::after{
+  width:100%;
+}
+
+h1{
+  font-size:2.5em;
+  margin:72px 0 16px;
+  position:relative;
+  display:inline-block;
+}
+
+h1::after{
+  content:"";
+  position:absolute;
+  width:110%;
+  height:12px;
+  bottom:8px;
+  left:-5%;
+  background:var(--accent);
+  z-index:-1;
+}
+
+h3{
+  margin-top:3em;
+}
+
+p{
+  max-width:68ch;
+  margin-bottom:1.5em;
+}
+
+.aside{
+  font-size:.9em;
+  border-left:3px solid #eee;
+  padding-left:14px;
+  margin:2em 0;
+}
+
+/* constellation */
+.research-wrap{
+  margin-top:2.5em;
+  position:relative;
+}
+
+svg{
+  width:100%;
+  height:340px;
+}
+
+.node circle{
+  cursor:pointer;
+  transition:.3s;
+  opacity:.9;
+}
+
+.node:hover circle{
+  transform:scale(1.08);
+  filter:drop-shadow(0 8px 22px rgba(0,0,0,.15));
+}
+
+.node text{
+  fill:#333;
+  font-size:14px;
   pointer-events:none;
+}
+
+.node{
+  animation:float 6s ease-in-out infinite;
+}
+
+.node:nth-child(2){animation-delay:1s}
+.node:nth-child(3){animation-delay:2s}
+.node:nth-child(4){animation-delay:3s}
+
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+  100%{transform:translateY(0)}
+}
+
+.tooltip{
+  position:absolute;
+  background:#111;
+  color:#fff;
+  font-size:12px;
+  padding:6px 10px;
+  border-radius:6px;
+  pointer-events:none;
+  opacity:0;
+  transition:.2s;
+}
+
+#research-info{
+  margin-top:1.2em;
+  font-size:.95em;
+  padding:14px;
+  background:#f8f8f8;
+  border-left:4px solid var(--accent);
+  display:none;
+}
+
+footer{
+  margin-top:90px;
+  font-size:.85em;
+  color:#777;
 }
 </style>
 </head>
+
 <body>
 
-<div class="topbar">
-aarav pillai — infrastructure playground
-</div>
-
-<div class="desktop" id="desktop">
-
-<canvas id="network"></canvas>
-
-<div class="window" style="top:80px; left:120px;">
-  <div class="window-header">creative ml</div>
-  <div class="window-content">
-    generative systems; aesthetic computation; sonic models.
+<nav>
+  <div class="nav-inner">
+    <a href="/">home</a>
+    <a href="/research/">research</a>
+    <a href="/writing/">writing</a>
+    <a href="/photography/">photography</a>
+    <a href="/contact/">contact</a>
   </div>
+</nav>
+
+<main>
+
+<h1>hello, i'm aarav pillai (he/him)</h1>
+
+<p>
+i build and study systems at the crossroads of creative ml, healthcare ai, and internet governance. i care less about what dazzles on stage and more about what lingers in policy, clinics, and codebases; the assumptions baked in, the behaviors reshaped, and the values that turn into defaults through repetition.</p>
+
+<p>
+i currently lead research at <a href="https://qinara.org">qinārā ai lab</a>, designing experimental creative systems while asking uncomfortable questions about the values quietly embedded in their code. before that, i taught at the ual creative computing institute on the msc data science and ai for the creative industries and the ma/msc creative computing programmes; training the next generation to both ship systems and side-eye them.</p>
+
+<p>
+before this, i worked as an independent data scientist on public-sector and humanitarian projects; building systems that had to work beyond ideal conditions. i am now preparing for doctoral research; a phase characterised by over-annotated pdfs, an unreasonable number of open tabs, and research questions that evolve faster than my version control can keep up.</p>
+
+<div class="aside">
+books taking up my attention:
+<a href="https://www.goodreads.com/aaravreviews">goodreads</a>
 </div>
 
-<div class="window" style="top:200px; left:450px;">
-  <div class="window-header">healthcare ai</div>
-  <div class="window-content">
-    assistive systems; embodied ai; clinical infrastructures.
-  </div>
+<div class="aside">
+structured proof of employability:
+<a href="assets/pdf/cv.pdf">download cv</a>
 </div>
 
-<div class="window" style="top:300px; left:220px;">
-  <div class="window-header">ai policy</div>
-  <div class="window-content">
-    governance; infrastructural power; data politics.
-  </div>
+<div class="aside">
+evidence of self-directed learning:
+<a href="https://www.linkedin.com/in/apillaiwork/details/certifications/">mooc certifications</a>
 </div>
 
-<div class="window" style="top:120px; left:700px;">
-  <div class="window-header">accessibility</div>
-  <div class="window-content">
-    adaptive systems; neurodiversity; sonic interaction.
-  </div>
-</div>
+<h3>current research interests</h3>
+
+<div class="research-wrap">
+
+<svg viewBox="0 0 700 260">
+
+<g class="node" data-info="policy design, data governance, infrastructural power.">
+  <circle cx="200" cy="140" r="55" fill="#f8d7e8"/>
+  <text x="200" y="145" text-anchor="middle">ai policy</text>
+</g>
+
+<g class="node" data-info="assistive systems, embodied ai, clinical contexts.">
+  <circle cx="360" cy="85" r="60" fill="#d6ecff"/>
+  <text x="360" y="90" text-anchor="middle">healthcare ai</text>
+</g>
+
+<g class="node" data-info="adaptive design, neurodiversity, sound.">
+  <circle cx="380" cy="175" r="65" fill="#dcf5e9"/>
+  <text x="380" y="180" text-anchor="middle">accessibility</text>
+</g>
+
+<g class="node" data-info="generative systems, aesthetic computation.">
+  <circle cx="520" cy="160" r="85" fill="#efe0ff"/>
+  <text x="520" y="165" text-anchor="middle">creative ml</text>
+</g>
+
+</svg>
+
+<div id="tooltip" class="tooltip"></div>
+<div id="research-info"></div>
 
 </div>
+
+</main>
+
+<footer>
+copyright © aarav pillai. last revised january 2026.
+</footer>
 
 <script>
-const canvas=document.getElementById("network");
-const ctx=canvas.getContext("2d");
-const desktop=document.getElementById("desktop");
+const nodes=document.querySelectorAll(".node");
+const tooltip=document.getElementById("tooltip");
+const info=document.getElementById("research-info");
 
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-
-/* ---------- DRAG SYSTEM ---------- */
-
-let active=null;
-let offsetX=0;
-let offsetY=0;
-
-document.querySelectorAll(".window").forEach(win=>{
-  win.addEventListener("mousedown",e=>{
-    active=win;
-    offsetX=e.clientX-win.offsetLeft;
-    offsetY=e.clientY-win.offsetTop;
-    win.style.cursor="grabbing";
-  });
-});
-
-document.addEventListener("mousemove",e=>{
-  if(active){
-    active.style.left=(e.clientX-offsetX)+"px";
-    active.style.top=(e.clientY-offsetY)+"px";
-  }
-});
-
-document.addEventListener("mouseup",()=>{
-  if(active){
-    active.style.cursor="grab";
-  }
-  active=null;
-});
-
-/* ---------- NETWORK GAME ---------- */
-
-function getCenters(){
-  return [...document.querySelectorAll(".window")].map(w=>{
-    return {
-      el:w,
-      x:w.offsetLeft+w.offsetWidth/2,
-      y:w.offsetTop+w.offsetHeight/2
-    }
-  });
-}
-
-/* eigenvector centrality */
-function computeCentrality(nodes){
-  const n=nodes.length;
-  const A=Array.from({length:n},()=>Array(n).fill(0));
-
-  for(let i=0;i<n;i++){
-    for(let j=i+1;j<n;j++){
-      const dx=nodes[i].x-nodes[j].x;
-      const dy=nodes[i].y-nodes[j].y;
-      const dist=Math.hypot(dx,dy);
-      if(dist<300){
-        const w=1-dist/300;
-        A[i][j]=w;
-        A[j][i]=w;
-      }
-    }
-  }
-
-  let v=Array(n).fill(1);
-  for(let k=0;k<10;k++){
-    let v2=Array(n).fill(0);
-    for(let i=0;i<n;i++){
-      for(let j=0;j<n;j++){
-        v2[i]+=A[i][j]*v[j];
-      }
-    }
-    const norm=Math.sqrt(v2.reduce((s,x)=>s+x*x,0));
-    if(norm>0) v=v2.map(x=>x/norm);
-  }
-  return v;
-}
-
-/* audio */
-function playTone(freq){
-  const audioCtx=new (window.AudioContext||window.webkitAudioContext)();
-  const osc=audioCtx.createOscillator();
-  const gain=audioCtx.createGain();
-  osc.type="sine";
-  osc.frequency.value=freq;
-  gain.gain.setValueAtTime(.15,audioCtx.currentTime);
-  gain.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+1.5);
-  osc.connect(gain);
-  gain.connect(audioCtx.destination);
-  osc.start();
-  osc.stop(audioCtx.currentTime+1.5);
-}
-
-/* click game */
-document.querySelectorAll(".window").forEach((w,i)=>{
-  w.addEventListener("dblclick",()=>{
-    playTone(220+ i*80);
-  });
-});
-
-/* render loop */
-function animate(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  const nodes=getCenters();
-  const centrality=computeCentrality(nodes);
-
-  for(let i=0;i<nodes.length;i++){
-    for(let j=i+1;j<nodes.length;j++){
-      const dx=nodes[i].x-nodes[j].x;
-      const dy=nodes[i].y-nodes[j].y;
-      const dist=Math.hypot(dx,dy);
-
-      if(dist<300){
-        ctx.beginPath();
-        ctx.moveTo(nodes[i].x,nodes[i].y);
-        ctx.lineTo(nodes[j].x,nodes[j].y);
-        ctx.strokeStyle="rgba(0,0,0,"+(1-dist/300)*0.25+")";
-        ctx.stroke();
-      }
-    }
-  }
-
-  nodes.forEach((node,i)=>{
-    node.el.style.boxShadow=
-      "0 8px 30px rgba(0,0,0,.08), 0 0 "+(centrality[i]*40)+"px rgba(0,0,0,.15)";
+nodes.forEach(node=>{
+  node.addEventListener("mousemove",e=>{
+    tooltip.textContent=node.querySelector("text").textContent;
+    tooltip.style.left=e.pageX+10+"px";
+    tooltip.style.top=e.pageY-30+"px";
+    tooltip.style.opacity=1;
   });
 
-  requestAnimationFrame(animate);
-}
+  node.addEventListener("mouseleave",()=>{
+    tooltip.style.opacity=0;
+  });
 
-animate();
-
-window.addEventListener("resize",()=>{
-  canvas.width=window.innerWidth;
-  canvas.height=window.innerHeight;
+  node.addEventListener("click",()=>{
+    info.style.display="block";
+    info.textContent=node.dataset.info;
+  });
 });
 </script>
 
